@@ -128,66 +128,68 @@ Thermal compatibility & Material and coating selection based on environmental co
 \section{Mass Budget}
 Now that all components have been selected regarding every subsystem, a preliminary mass budget can be made to estimate the total mass. In this analysis, all components were considered, including a margin to account for uncertainties. These margins were based on the maturity, level of confidence and potential design changes of each system. The mass budget overview is given in \autoref{tab:mass_budget}.
 
-\begin{longtable}{llrrr}
+\begin{longtable}{llrrrr}
 \caption{Cleaned subsystem mass budget} \\
 \hline
-\textbf{Subsystem} & \textbf{Component} & \textbf{\#} & \textbf{Mass (kg)} & \textbf{Total mass incl. margin (kg)} \\
+\textbf{Subsystem} & \textbf{Component} & \textbf{\#} & \textbf{Mass (kg)} & \textbf{Margin} & \textbf{Total mass incl. margin (kg)} \\
 \hline
 \endfirsthead
 
 \hline
-\textbf{Subsystem} & \textbf{Component} & \textbf{\#} & \textbf{Mass (kg)} & \textbf{Total mass incl. margin (kg)} \\
+\textbf{Subsystem} & \textbf{Component} & \textbf{\#} & \textbf{Mass (kg)} & \textbf{Margin} & \textbf{Total mass (kg)} \\
 \hline
 \endhead
 
-ADCS & IMU & 1 & 0.500 & 0.550 \\
-CDHS & All except computer & 1 & 0.300 & 0.330 \\
+ADCS & IMU & 1 & 0.500 & 10\% & 0.550 \\
+CDHS & All except computer & 1 & 0.300 & 10\% & 0.330 \\
 \hline
 
-ISRU & Valves & 3 & 0.014 & 0.051 \\
-ISRU & Pump/Intake & 1 & 0.550 & 0.660 \\
-ISRU & N2 Storage Tank & 1 & 0.180 & 0.216 \\
-ISRU & Controller Unit & 1 & 0.076 & 0.091 \\
-ISRU & N2 Separator & 1 & 0.300 & 0.360 \\
-ISRU & N2 Pump & 1 & 0.250 & 0.300 \\
-ISRU & Pressure Sensors & 2 & 0.220 & 0.528 \\
+ISRU & Valves & 3 & 0.014 & 20\% & 0.051 \\
+ISRU & Pump/Intake & 1 & 0.550 & 20\% & 0.660 \\
+ISRU & N2 Storage Tank & 1 & 0.180 & 20\% & 0.216 \\
+ISRU & Controller Unit & 1 & 0.076 & 20\% & 0.091 \\
+ISRU & N2 Separator & 1 & 0.300 & 20\% & 0.360 \\
+ISRU & N2 Pump & 1 & 0.250 & 20\% & 0.300 \\
+ISRU & Pressure Sensors & 2 & 0.220 & 20\% & 0.528 \\
 \hline
 
-PAY & Mass Spectrometer & 1 & 10.900 & 11.990 \\
-PAY & Nephelometer & 1 & 0.800 & 0.880 \\
-PAY & Laser Spectrometer & 1 & 0.620 & 0.682 \\
-PAY & pH Sensor & 1 & 0.350 & 0.385 \\
-PAY & Weather Instrument Suit & 1 & 0.100 & 0.110 \\
-PAY & Pyrgeometer & 2 & 1.300 & 2.860 \\
-PAY & Sonic Anemometer & 1 & 0.400 & 0.440 \\
-PAY & Optical Particle Counter & 1 & 2.000 & 2.200 \\
-PAY & Barometer & 5 & 0.050 & 0.275 \\
+PAY & Mass Spectrometer & 1 & 10.900 & 10\% & 11.990 \\
+PAY & Nephelometer & 1 & 0.800 & 10\% & 0.880 \\
+PAY & Laser Spectrometer & 1 & 0.620 & 10\% & 0.682 \\
+PAY & pH Sensor & 1 & 0.350 & 10\% & 0.385 \\
+PAY & Weather Instrument Suite & 1 & 0.100 & 10\% & 0.110 \\
+PAY & Pyrgeometer & 2 & 1.300 & 10\% & 2.860 \\
+PAY & Sonic Anemometer & 1 & 0.400 & 10\% & 0.440 \\
+PAY & Optical Particle Counter & 1 & 2.000 & 10\% & 2.200 \\
+PAY & Barometer & 5 & 0.050 & 10\% & 0.275 \\
 \hline
 
-TCS & Cooling system & 1 & 5.000 & 6.000 \\
-TCS & Heating system & 1 & 1.000 & 1.200 \\
-TCS & Temp. sensors & 15 & 0.004 & 0.072 \\
+TCS & Cooling system & 1 & 5.000 & 20\% & 6.000 \\
+TCS & Heating system & 1 & 1.000 & 20\% & 1.200 \\
+TCS & Temp. sensors & 15 & 0.004 & 20\% & 0.072 \\
 \hline
 
-STRUC & Barometer Tether & 1 & 4.160 & 5.824 \\
-STRUC & Tether Reel/motor & 1 & 2.000 & 2.800 \\
-STRUC & Balloon Tethers & 4 & 0.200 & 1.120 \\
-STRUC & Gondola Structure & 1 & 5.000 & 7.000 \\
+STRUC & Barometer tether & 1 & 4.160 & 40\% & 5.824 \\
+STRUC & Tether reel/motor & 1 & 2.000 & 40\% & 2.800 \\
+STRUC & Balloon tethers & 4 & 0.200 & 40\% & 1.120 \\
+STRUC & Gondola structure & 1 & 5.000 & 40\% & 7.000 \\
 \hline
 
-PWR & Solar Panels & 1 & 3.000 & 3.600 \\
-PWR & Battery & 1 & 4.000 & 4.800 \\
-PWR & PCDU & 1 & 1.500 & 1.800 \\
+PWR & Solar panels & 1 & 3.000 & 20\% & 3.600 \\
+PWR & Battery & 1 & 4.000 & 20\% & 4.800 \\
+PWR & PCDU & 1 & 1.500 & 20\% & 1.800 \\
 \hline
 
-COM & Communications Hardware & 3 & 0.237 & 0.261 \\
+COM & HRA & 1 & 0.120 & 10\% & 0.132 \\
+COM & UHF & 1 & 0.037 & 10\% & 0.041 \\
+COM & Other hardware & 1 & 0.080 & 10\% & 0.088 \\
 \hline
 
-TTC & X-band Transponder & 1 & 3.000 & 3.300 \\
-TTC & Antenna & 1 & 1.000 & 1.100 \\
+TTC & X-band transponder & 1 & 3.000 & 10\% & 3.300 \\
+TTC & Antenna & 1 & 1.000 & 10\% & 1.100 \\
 \hline
 
-\textbf{TOTAL} &  &  & \textbf{49.011} & \textbf{61.785} \\
+\textbf{TOTAL} &  &  & \textbf{49.011} &  & \textbf{61.785} \\
 \hline
 \end{longtable}
 
