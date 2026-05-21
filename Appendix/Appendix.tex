@@ -1,0 +1,345 @@
+%=== APPENDIX TABLES ===
+
+\appendix
+%========================
+\chapter{Requirements}
+%========================
+\small
+\noindent The requirement naming convention is structured as follows. 
+
+\begin{table}[H]
+\centering
+\renewcommand{\arraystretch}{0.9}
+\small
+\caption{Requirement ID abbreviation meanings}
+\label{tab:req_id_abbreviations}
+\begin{tabular}{ll}
+\hline
+\textbf{Abbreviation} & \textbf{Meaning} \\
+\hline
+REQ & Requirement \\
+F & Functional requirement \\
+C & Constraint requirement \\
+OP & Operational requirement \\
+STK & Stakeholder \\
+LAU & Launch \\
+DEP & Deployment \\
+SCI & Scientific goals \\
+ENV & Operating environment \\
+COMP & External compliance \\
+PAY & Payload \\
+SUB & Other subsystems \\
+MIS & Mission / spacecraft \\
+\hline
+\end{tabular}
+\end{table}
+
+
+\noindent Prefix REQ identifies the item as a requirement. This is followed by a single letter indicating the requirement type (F for functional, OP for operational), and C for constraints. The next three letters represent the first three letters of the branch in the Requirements Discovery Tree from which the requirement is derived. Finally, number is used to uniquely identify the requirement within the branch.
+
+{\small
+\renewcommand{\arraystretch}{0.9}
+\begin{longtable}{@{}
+>{\raggedright\arraybackslash}p{0.22\textwidth}
+>{\raggedright\arraybackslash}p{0.74\textwidth}
+@{}}
+\caption{Stakeholder Requirements} \label{tab:stakeholder_requirements} \\
+
+\toprule
+\textbf{Stakeholder Requirement ID} & \textbf{Stakeholder Requirement} \\
+\midrule
+\endfirsthead
+
+\toprule
+Stakeholder Requirement ID & Stakeholder Requirement \\
+\midrule
+\endhead
+
+\midrule
+\multicolumn{2}{r}{\small Continued on next page} \\
+\endfoot
+
+\bottomrule
+\endlastfoot
+
+REQ-STK-1.1 &
+The mission shall be compatible with the Venus mission architecture, including the launcher, the carrier spacecraft, S/C contractors, and a data relay through the orbiter. \\
+
+REQ-STK-1.2 &
+The mission shall achieve all scientific goals. \\
+
+REQ-STK-1.3 &
+The mission shall be able to transmit all the data back to Earth. \\
+
+REQ-STK-1.4 &
+The mission shall avoid harmful contamination of the Venus environment in accordance with applicable planetary protection requirements. \\
+
+REQ-STK-1.5 &
+The spacecraft shall be shown to be reliable. \\
+
+REQ-STK-1.6 &
+The spacecraft shall reach the Venus atmosphere safely. \\
+
+REQ-STK-1.7 &
+The mission shall be able to survive the operating environment of Venus. \\
+\end{longtable}
+
+{\small
+\renewcommand{\arraystretch}{0.9}
+\begin{spacing}{1.1}
+\begin{longtable}{@{}
+>{\raggedright\arraybackslash}p{0.18\textwidth}
+>{\raggedright\arraybackslash}p{0.58\textwidth}
+>{\raggedright\arraybackslash}p{0.20\textwidth}
+@{}}
+\caption{System Requirements Traceability Matrix} \label{tab:requirements_traceability} \\
+
+\toprule
+Requirement ID & Requirement & Stakeholder Requirement ID \\
+\midrule
+\endfirsthead
+
+\toprule
+Requirement ID & Requirement & Stakeholder Requirement ID \\
+\midrule
+\endhead
+
+\midrule
+\multicolumn{3}{r}{\small Continued on next page} \\
+\endfoot
+
+\bottomrule
+\endlastfoot
+
+\multicolumn{3}{@{}l}{\textbf{Complete S/C}} \\
+\midrule
+
+REQ-C-MIS-01 &
+The aerobot operational lifetime shall be at least 5 Earth years. &
+REQ-STK-1.2 \\
+
+REQ-C-MIS-02 &
+Total aerobot system mass shall not exceed 700 kg. &
+REQ-STK-1.1 \\
+
+REQ-C-MIS-03 &
+Each aerobot shall have a survival probability greater than 90\% over the 5-year mission. &
+REQ-STK-1.5 \\
+
+REQ-F-MIS-04 &
+The design shall incorporate the use of atmospheric nitrogen to compensate for helium leakage. &
+REQ-STK-1.2 \\
+
+REQ-C-MIS-05 &
+All subsystems shall have a minimum Technology Readiness Level TRL of 4. &
+REQ-STK-1.5 \\
+REQ-C-MIS-06 & The aerobot shall be able to adjust its operating altitude with a rate of TBD.& REQ-STK-1.7 \\
+\multicolumn{3}{@{}l}{\textbf{Launch}} \\
+\midrule
+
+REQ-C-LAU-01 &
+The S/C shall be compatible with TBD loads involved in launch. &
+REQ-STK-1.1 \\
+
+REQ-C-LAU-02 &
+The S/C shall be compatible with TBD vibrations involved in launch. &
+REQ-STK-1.1\\
+
+REQ-C-LAU-03 &
+The S/C shall be compatible with the TBD volume envelope of the launcher. &
+REQ-STK-1.1 \\
+
+REQ-F-LAU-04 &
+The S/C shall ensure that no balloon inflation or deployment mechanism can be activated before Venus entry. &
+REQ-STK-1.6 \\
+
+REQ-F-LAU-05 &
+The S/C shall ensure that all launch-locking mechanisms can be released after arrival at Venus without preventing deployment. &
+REQ-STK-1.6 \\
+REQ-F-LAU-06 & Pre-launch integration tests shall be performed to verify the interfacing compatibility of the capsule, launcher, spacecraft, and aerobot & REQ-STK-1.6 \\
+
+\multicolumn{3}{@{}l}{\textbf{Balloon Entry and Deployment}} \\
+\midrule
+
+REQ-F-DEP-01 &
+The aerobot(s) shall be compatible with deployment from a Venus orbiter with a 24-hour elliptical orbit acting as a data relay. &
+REQ-STK-1.6 \\
+
+REQ-C-DEP-02 &
+The aerobot(s) shall be deployable to an operational altitude of TBD km. & REQ-STK-1.6 \\
+
+REQ-F-DEP-03 &
+The balloon envelope shall deploy without tearing, snagging, or entanglement with the gondola, parachute, or aeroshell. & REQ-STK-1.6 \\
+
+REQ-F-DEP-04 &
+The aerobot(s) shall support post-deployment status assessment and confirmation of successful deployment. &
+REQ-STK-1.5 \\
+
+
+REQ-C-DEP-06 &
+The aerobot shall not vent at least TBD\% of stored TBD gas into the balloon before reaching TBD altitude. &
+REQ-STK-1.6 \\
+
+REQ-C-DEP-07 &
+The system shall sustain at least all the TBD loads experienced during re-entry. &
+REQ-STK-1.6 \\
+
+
+
+REQ-F-DEP-08 &
+The system shall ensure dynamic stability of the aerobot during re-entry and deployment. &
+REQ-STK-1.6 \\
+REQ-F-DEP-09 & The aerobot and all supporting systems shall be compatible with the dimensional constraints of the entry capsule & REQ-STK-1.6 \\
+REQ-F-DEP-10 & The parachutes shall be deployed according to the deployment sequence to slow the S/C down to the TBD speed required. & REQ-STK-1.6 \\
+REQ-F-DEP-11 & The heat shield shall be deployed with the TBD correct orientation relative to the orbit-insertion trajectory & REQ-STK-1.6 \\
+REQ-F-DEP-12  & The Gondola shall be deployed after balloon inflation without any tearing & REQ-STK-1.6 \\
+REQ-F-DEP-13 & The heat shield shall be discarded without generating any damage to the rest of the spacecraft & REQ-STK-1.6 \\
+REQ-F-DEP-14 & The heat shield shall survive the TBD loads experienced during entry of the Venus atmosphere & REQ-STK-1.6 \\
+REQ-F-DEP-15 & The heat shield survive the TBD temperatures experienced during entry of the Venus atmosphere & REQ-STK-1.6 \\
+\multicolumn{3}{@{}l}{\textbf{Scientific Goals}} \\
+\midrule
+
+REQ-F-SCI-01 &
+The system shall perform aerosol sampling and detailed chemical analysis of clouds at least once per month. &
+REQ-STK-1.2 \\
+
+REQ-F-SCI-02 &
+The sampling system shall not affect the chemical composition of the sample. &
+REQ-STK-1.2 \\
+
+REQ-C-SCI-03 &
+The maximum altitude separation between samples shall be TBD km. &
+REQ-STK-1.2 \\
+
+REQ-C-SCI-04 &
+The altitude accuracy of sampling shall be TBD km. &
+REQ-STK-1.2 \\
+
+REQ-C-SCI-05 &
+The S/C shall be able to measure vertical wind speed at TBD intervals &
+REQ-STK-1.2 \\
+REQ-F-SCI-06 & The S/C shall include TBD measurement systems to detect any seismic activity  & REQ-STK-1.2 \\
+REQ-F-SCI-07 & The S/C shall be able to measure cloud dynamics at TBD intervals & REQ-STK-1.2 \\
+REQ-F-SCI-08 & The S/C shall be able to measure horizontal wind speed at TBD intervals & REQ-STK-1.2 \\
+REQ-F-SCI-09 &  The mission shall address the VEXAG roadmap goals & REQ-STK-1.2 \\
+REQ-F-SCI-10 & The S/C shall be able to measure the temperature of the venusian atmosphere & REQ-STK-1.2 \\
+REQ-F-SCI-11 & The S/C shall be able to measure pressure of the venusian atmosphere  & REQ-STK-1.2 \\
+
+\multicolumn{3}{@{}l}{\textbf{Survive Operating Environment}} \\
+\midrule
+
+REQ-C-ENV-01 &
+The aerobot shall tolerate the range of atmospheric pressure of TBD--TBD Pa. &
+REQ-STK-1.7 \\
+
+REQ-C-ENV-02 &
+The aerobot shall tolerate the atmospheric temperature range of TBD--TBD K. &
+REQ-STK-1.7 \\
+
+REQ-F-ENV-03 &
+The aerobot(s) properties shall not degrade more than TBD\% in TBD years in Venus' toxic atmosphere. &
+REQ-STK-1.7 \\
+
+REQ-F-ENV-04 &
+The aerobot shall withstand the TBD radiation experienced during the entire mission duration. &
+REQ-STK-1.7 \\
+
+
+
+\multicolumn{3}{@{}l}{\textbf{External Compliance}} \\
+\midrule
+
+REQ-OP-COMP-01 &
+The mission shall comply with COSPAR planetary protection guidelines regarding atmospheric contamination. &
+REQ-STK-1.4 \\
+
+REQ-C-COMP-02 &
+Total mission cost shall not exceed 400 million euros in FY2026, including operations. &
+No direct STK shown \\
+
+REQ-C-COMP-03 &
+The S/C shall fit inside the required launch window of late 2035--2037. &
+REQ-STK-1.1 \\
+
+REQ-OP-COMP-04 &
+The mission shall comply with the Outer Space Treaty requirements regarding the harmful contamination of celestial environments. &
+REQ-STK-1.4 \\
+
+REQ-OP-COMP-05 &
+The mission shall define an end-of-life procedure to avoid harmful contamination of the Venus atmosphere. &
+REQ-STK-1.4 \\
+
+REQ-OP-COMP-06 &
+The mission shall not mimic previous Venus aerobot proposed concepts during the last 60 years. &
+REQ-STK-1.3 \\
+
+REQ-OP-COMP-07 &
+All components shall be compatible with what the available contractors can deliver. &
+REQ-STK-1.1 \\
+
+REQ-F-COMP-05 & The project shall identify a qualified backup manufacturer for all mission-critical manufactured components before the start of final production & REQ-STK-1.1 \\
+
+\multicolumn{3}{@{}l}{\textbf{Payload}} \\
+\midrule
+
+REQ-C-PAY-01 &
+Each instrument suite shall achieve a successful analysis probability greater than 80\%. &
+REQ-STK-1.5 \\
+
+REQ-C-PAY-02 &
+The total mass of the payload shall stay below TBD kg. &
+REQ-STK-1.1 \\
+
+REQ-F-PAY-03 &
+Scientific components shall fit within the TBD volume of the allocated space. &
+REQ-STK-1.1 \\
+
+REQ-F-PAY-04 &
+The generated payload data that needs to be stored shall be no more than TBD MB. &
+REQ-STK-1.3 \\
+
+\multicolumn{3}{@{}l}{\textbf{Other Subsystems}} \\
+\midrule
+
+REQ-C-SUB-01 &
+Gondola mass shall not exceed 200 kg. &
+REQ-STK-1.1 \\
+
+REQ-C-SUB-02 &
+Balloon envelope mass shall not exceed 100 kg. &
+REQ-STK-1.1 \\
+
+REQ-C-SUB-03 &
+Inflation system mass shall not exceed 150 kg. &
+REQ-STK-1.1 \\
+
+REQ-C-SUB-04 &
+Aeroshell and parachute mass shall not exceed 250 kg. &
+REQ-STK-1.1 \\
+
+REQ-C-SUB-05 &
+Data transmission rate shall not exceed 1500 bps. &
+REQ-STK-1.3 \\
+
+REQ-C-SUB-06 &
+Total onboard energy storage shall not exceed 500 Wh. &
+REQ-STK-1.1 \\
+
+REQ-C-SUB-07 &
+The balloon leakage shall be no more than TBD $\mathrm{cm^{3}\,m^{-2}\,day^{-1}}$. &
+REQ-STK-1.2 \\
+
+\end{longtable}
+
+
+\end{spacing}}
+
+
+%========================
+\chapter{Project Planning Update}
+%========================
+\input{Chapters/Chapter_Project_Plan_Update}
+
+
+%=== END OF APPENDIX TABLES AND FIGURES===
+\newpage

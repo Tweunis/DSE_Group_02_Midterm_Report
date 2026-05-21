@@ -1,0 +1,56 @@
+% \chapter{Project Planning Update}
+% \label{chapter: project planning update}
+
+By the submission of this report, about half of the time assigned for this project has passed. It is a good moment for a reflection and update of the project planning documents.
+
+In the project planning phase \cite{project_plan_vista}, a workflow diagram (WFD) and a Gantt chart were developed to facilitate organized work. Despite great effort committed to developing a well designed Gantt chart, it failed to serve a helpful role during the project. The most promising and feature-complete Gantt software identified was the Project Libre desktop app. However, the software was found to be too unwieldy for daily use. Multiple specific features were either implemented differently from what was desired by the planning team, or missing completely. For example, using the scroll wheel scrolled the screen horizontally instead of vertically, which increased the number of actions required to browse the tasks dramatically. No feature supported editing the tasks in batches, so wide updates required changing every single task individually. By design, resource assignment and task work hours are coupled, but the coupling didn't behave as desired. Milestone implementation, task dependencies, grouping and marking completion also were functional, but problematic in practice. It is believed that a truly helpful use of the Gantt chart requires identifying software with exactly the specific features that are expected by the planning team. It is likely that such software doesn't already exist, and would have to be implemented. This, unfortunately, is not possible within the assigned time frame.
+
+The workflow diagram, on the other hand, was practically useful during the project. The graphical representation of task progress facilitated look-ahead, and the inclusion of all deliverables ensured completion. Creating the graphics of the WFD took quite a lot of effort, and editing them live wasn't really feasible, which is actually believed to be a good thing. The WFD was treated as a stable model of the ideal truth, and the practical daily tasks assignments were written down and tracked on a whiteboard. 
+
+One noticeable takeaway is that tasks are much more easily tracked and assigned per subsystem, rather than per analysis type. The significance of design and progress meeting also became much more apparent, such that they shall be considered in the schedule as well. These are the primary updates for the project plan. In addition, the project finalization stage was restructured slightly to better reflect our understanding of the deliverables.
+
+% Workflow Diagram
+\pagestyle{empty}
+\includepdf[
+pages=-,
+landscape=true,
+% fitpaper=true,
+pagecommand={
+        \thispagestyle{empty}
+        \refstepcounter{figure} % step counter FIRST
+        \begin{tikzpicture}[remember picture,overlay]
+            \node[
+                anchor=south,
+                yshift=5mm
+            ] at (current page.south)
+            {\small\textbf{Figure \thefigure:} 
+            Work Flow Diagram};
+        \end{tikzpicture}
+        \label{fig:WFD} % <-- add label HERE
+    }
+]{fig/WFD_midterm.drawio.pdf}
+
+% Gantt Chart
+\pagestyle{empty}
+\includepdf[
+pages=1,
+landscape=true,
+fitpaper=true,
+pagecommand={
+        \thispagestyle{empty}
+        \refstepcounter{figure} % step counter FIRST
+        \begin{tikzpicture}[remember picture,overlay]
+            \node[
+                anchor=south,
+                yshift=5mm
+            ] at (current page.south)
+            {\small\textbf{Figure \thefigure:} 
+            Gantt chart};
+        \end{tikzpicture}
+        \label{fig:gantt} % <-- add label HERE
+    }
+]{fig/Gantt_midterm.drawio.pdf}
+
+
+
+

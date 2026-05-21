@@ -1,0 +1,134 @@
+
+\section{Cross-Subsystem Coupling Map}
+\label{sec:coupling_map}
+
+The N\textsuperscript{2} matrix in Chapter~\ref{chap:n2} catalogues 9~$\times$~9 interface relationships at the type level (mechanical, electrical, data, thermal, fluid). The system-level trade-off requires a further step: assigning a resource domain (mass, power, volume, reliability) and a directionality to each coupling, so that design choices in one subsystem can be propagated to their effect on others.
+
+Table~\ref{tab:coupling_map} lists every coupling that is quantitatively significant at the current level of design definition. Couplings classed as "advisory" in the N\textsuperscript{2} chapter are excluded; only those for which a numerical sensitivity can be derived from the subsystem chapters are retained.
+
+\renewcommand{\arraystretch}{1.25}
+
+\begin{longtable}{p{2cm}|p{1.9cm}|p{2cm}|p{1.4cm}|p{8cm}}
+
+\caption{Cross-subsystem coupling map. Directionality indicates which subsystem is the driver and which is the receiver. Severity is assessed on the 1-5 scale: 5 denotes a coupling that directly constrains a system-level requirement.}
+\label{tab:coupling_map} \\
+
+\hline
+\textbf{Driver subsystem} & \textbf{Receiver subsystem} & \textbf{Resource domain} & \textbf{Severity} & \textbf{Physical mechanism} \\
+\hline
+\endfirsthead
+
+\multicolumn{5}{c}%
+{{\tablename\ \thetable{} - continued from previous page}} \\
+\hline
+\textbf{Driver subsystem} & \textbf{Receiver subsystem} & \textbf{Resource domain} & \textbf{Severity} & \textbf{Physical mechanism} \\
+\hline
+\endhead
+
+\hline
+\multicolumn{5}{r}{{Continued on next page}} \\
+\endfoot
+
+\hline
+\endlastfoot
+
+ISRU + Buoyancy & EPS & Power & 5 & ISRU runs continuously to compensate N\textsubscript{2} leakage ($\approx$21~W steady state); superpressure bladder pump adds transient demand during altitude manoeuvres. \\
+
+ISRU + Buoyancy & Deployment & Mass & 5 & Option~2 requires $\approx$300~kg of stored N\textsubscript{2} brought to Venus, setting the dominant contribution to entry mass and directly sizing the COPV stack. \\
+
+ISRU + Buoyancy & TCS \& Env. & Thermal & 4 & Gas-separation hardware (PSA/molecular sieve) operates in the Venus cloud environment; compressor waste heat must be managed within the gondola thermal zone. \\
+
+ISRU + Buoyancy & GNC & Data/Fluid & 4 & Navigation issues vent and inflate commands; ISRU returns buoyancy state data. The altitude-control loop bandwidth is limited by the response time of the PSA system. \\
+
+Deployment & ISRU + Buoyancy & Mass/Fluid & 5 & Cascaded COPV stack (selected as S2) is the sole stored-gas source for the initial balloon fill. COPV sizing drives deployment subsystem mass and constrains gondola structural geometry. \\
+
+Deployment & Structures & Mechanical & 4 & Pyroshock and separation loads at events P1--P9 are the dominant transient structural inputs to the gondola primary structure. The COPV-as-rib integration (vector~$\varepsilon_1$) directly couples aeroshell geometry to gondola load paths. \\
+
+Deployment & TCS \& Env. & Thermal & 3 & Aeroshell soak-back after entry raises temperature of retained COPV structure and gondola envelope interface; separation timing couples into thermal margin of folded balloon membrane. \\
+
+EPS & All subsystems & Power & 5 & 500~Wh energy storage budget is a hard system constraint. The allocation between ISRU ($\approx$21~W continuous), communications ($\approx$17--20~W during transmission), payload ($\approx$75~W peak), and thermal active heating determines whether a solar-only or hybrid source is feasible. \\
+
+EPS & ISRU + Buoyancy & Power & 5 & See ISRU row above; the causal direction is bidirectional. ISRU power demand is the single largest continuous consumer and was the deciding factor in rejecting Balloon Options~1 and~3. \\
+
+TCS \& Env. & EPS & Power & 3 & Active heater patches on batteries, sampling lines, and payload instruments add a variable parasitic power draw that must be included in the worst-case nightside power budget. \\
+
+TCS \& Env. & Payload & Thermal & 4 & Instrument temperature limits (e.g.\ NMS: $-20$ to $+50$\textdegree C; nephelometer: $-10$ to $+40$\textdegree C) drive the internal gondola set-point and therefore the heater power allocation and insulation mass. \\
+
+Payload & GNC & Data & 3 & Barometers serve dual roles as seismic sensors and altitude-reference instruments. Their placement on the tether (Architecture~B) affects the barometric altitude accuracy available to the GNS altitude controller. \\
+
+Payload & ISRU + Buoyancy & Interface & 3 & Payload draws atmospheric samples directly from the environment rather than through the lift-gas system; however, the aerosol inlet must be co-located on the gondola without disturbing the ISRU intake flow path. \\
+
+CDHS & EPS & Power & 4 & The GAUSS UHF transceiver draws $\approx$17--20~W at maximum RF output. Communication sessions during night represent a net power deficit that must be buffered by stored energy; this is a scheduling constraint on the GNS Doppler ranging mode. \\
+
+CDHS & GNC & Data & 4 & Doppler tracking of the aerobot-orbiter link is the primary source of absolute position fixes. Link availability (target $>90\%$ during orbiter passes) directly bounds the IMU drift accumulation interval and therefore the dead-reckoning position error. \\
+
+GNC & ISRU + Buoyancy & Data/ Command & 4 & GNS altitude controller issues vent/inflate commands to the ISRU subsystem. Controller performance depends on buoyancy state feedback latency from the PSA system. \\
+
+\end{longtable}
+
+Two structural features of Table~\ref{tab:coupling_map} are significant for the system trade-off. First, ISRU + Buoyancy appears as either driver or receiver in seven of the sixteen listed couplings, confirming its role as the architectural pivot of the VISTA aerobot. This is a direct consequence of the ISRU-derived nitrogen architecture: a mission using a pre-loaded inert-gas balloon would distribute these couplings differently. Second, the Power subsystem is simultaneously the hardest-constrained resource (500~Wh storage) and the subsystem that every other active subsystem draws from. These two observations structure the quantitative analysis that follows.
+
+\subsection{Mass Budget Coupling}
+\label{subsec:mass_coupling}
+
+The dominant mass coupling in the system is between the ISRU balloon design choice and the deployment subsystem entry mass. Table~\ref{tab:mass_coupling} summarises the mass implications of the three balloon options evaluated in Chapter~\ref{chap:ISRU}, propagated to their effect on other subsystems.
+
+\begin{table}[ht]
+\centering
+\caption{System-level mass consequences of balloon architecture selection. Values for Option~2 are numerical estimates from the sizing model (Chapter~\ref{chap:ISRU}); Options~1 and~3 are qualitative architecture-level assessments. All masses are approximate ROM figures.}
+\label{tab:mass_coupling}
+\renewcommand{\arraystretch}{1.25}
+\begin{tabular}{p{3.0cm}p{3.2cm}p{3.2cm}p{3.2cm}}
+\hline
+\textbf{Parameter} & \textbf{Option~1} \newline (He + ISRU fill) & \textbf{Option~2} \newline (Pre-filled N\textsubscript{2} + ISRU top-up) & \textbf{Option~3} \newline (Empty + He bootstrap) \\
+\hline
+Stored lift gas mass at launch & Low (He only) & High ($\approx$300~kg N\textsubscript{2}) & Medium (He for bootstrap) \\
+COPV/storage mass (Deployment) & Low & High; drives S2 cascaded COPV sizing & Medium \\
+ISRU continuous power demand & High (must pump $\approx$5~kg N\textsubscript{2}/day) & Low ($\approx$21~W for $\approx$20-22~g/day leakage) & High (same as Option~1 during fill) \\
+Entry mass implication (ROM) & $\sim$93~kg (Option~1 anchor) & $\sim$393~kg (Option~3 anchor) & $\sim$162~kg (Option~2 anchor) \\
+Deployment reliability impact & Low COPV mass $\Rightarrow$ simpler S-axis & Drives S2; $\varepsilon_1$ integration required to avoid dead mass & Intermediate \\
+\hline
+\end{tabular}
+\end{table}
+
+The critical observation from Table~\ref{tab:mass_coupling} is that the mass penalty of Option~2 (pre-filled N\textsubscript{2}) is not localised to the ISRU subsystem. It propagates through the deployment subsystem to set the 393~kg ROM entry-mass anchor used throughout Chapter~\ref{ch:deployment}, which in turn sizes the aeroshell, parachute system, and COPV rib structure. The $\varepsilon_1$ integration vector - repurposing the COPV stack as load-bearing aeroshell ribs - was identified precisely as a response to this coupling: without it, the 300~kg gas storage would be carried as dead deployment mass jettisoned before float.
+
+Conversely, the lower entry masses of Options~1 and~3 reduce deployment complexity but impose large continuous ISRU power demands (estimated at $\approx$988~W during the N\textsubscript{2} fill phase for Option~1), which directly violate the 500~Wh energy storage constraint. This is the system-level mechanism by which the power budget eliminates Options~1 and~3 from consideration, independently of the subsystem-level scoring in Chapter~\ref{chap:ISRU}.
+
+\subsection{Power Budget Coupling}
+\label{subsec:power_coupling}
+
+The 500~Wh energy storage budget is the single hardest system constraint with cross-subsystem consequences. Table~\ref{tab:power_allocation} assembles the power demands from subsystem chapters into a consolidated system-level power budget for the nominal operational mode.
+
+\begin{table}[h!]
+\centering
+\caption{Consolidated system power budget for nominal float operations (dayside and nightside). Values are drawn from subsystem chapters; entries marked TBD have not yet been sized. The 500~Wh constraint applies to the energy that must be stored to bridge the nightside period.}
+\label{tab:power_allocation}
+\renewcommand{\arraystretch}{1.25}
+\begin{tabular}{p{3.8cm}p{2.0cm}p{2.0cm}p{5.2cm}}
+\hline
+\textbf{Consumer} & \textbf{Continuous / avg.\ [W]} & \textbf{Peak [W]} & \textbf{Source and notes} \\
+\hline
+ISRU + Buoyancy (leakage compensation) & $\approx$21 & $\sim$50 (altitude manoeuvre) & Chapter~\ref{chap:ISRU}; 21~W continuous for 20-22~g/day N\textsubscript{2} make-up. \\
+Communications (UHF Tx) & $\approx$5 (duty-cycled) & $\approx$20 & Chapter~\ref{chap:comms}; GAUSS transceiver at max RF output $\approx$17-20~W; 25\% duty cycle assumed from Table~9-1. \\
+Payload (instruments) & $\approx$75 (est.) & TBD & Chapter~\ref{chap:payload}; NMS 14~W, AFN 40~W, mTLS 14~W, WIS 1~W, barometers 0.5~W, pyrgeometers 6~W, TOPS 2~W. \\
+Guidance \& Navigation & $\approx$7 & $\approx$10 & Chapter~\ref{chapter: guidance and navigation}; Table~9-1: IMUs 3~W continuous, antenna 2~W (25\%), pressure probe $<$0.1~W. \\
+Thermal active heating & TBD & TBD & Chapter~\ref{ch:thermal_environmental_control}; battery pack, sampling lines, payload instruments; design not yet sized. \\
+CDHS / avionics & TBD & TBD & Not sized at midterm. \\
+ADCS actuators & TBD & TBD & Not sized at midterm. \\
+\hline
+\textbf{Partial system total (known)} & $\boldsymbol{\approx 108}$ & \textbf{TBD} & Excludes thermal heating, CDHS, and ADCS. \\
+\hline
+\end{tabular}
+\end{table}
+
+Even with the TBD items excluded, the partial system total of $\approx$108~W continuous significantly constrains the power source selection. A Venus day-night cycle at 55~km altitude lasts approximately 5.8~Earth days (the Venus solar day is $\approx$116.75~Earth days, giving a roughly equal day/night split for a balloon drifting with the zonal wind). If the nightside duration is conservatively estimated at 4~Earth days (as assumed in the solar array preliminary sizing in Chapter~\ref{chap:power}), the energy required from storage is:
+
+\begin{equation}
+E_{\mathrm{night}} = P_{\mathrm{night}} \times T_{\mathrm{night}} \approx 108\,\mathrm{W} \times 4 \times 86400\,\mathrm{s} \approx 37.3\,\mathrm{MJ} = 10{,}360\,\mathrm{Wh}
+\end{equation}
+
+This is approximately 20 times the stated 500~Wh storage budget, confirming that the 500~Wh figure cannot represent total nightside energy and is more plausibly interpreted as a peak-transient buffer. This discrepancy is an open system-level inconsistency that must be resolved during detailed design. The resolution most likely lies in duty-cycling the payload and ISRU around the nightside, or in a hybrid solar + RTG power source. The solar array preliminary sizing in Chapter~\ref{chap:power} derived a required solar array output of 132.6~W and used a 4-day night and 4-day day assumption, which is consistent with the numbers above and confirms that the solar array must supply the full continuous load; the 500~Wh battery then handles transient peaks only.
+
+The inter-subsystem consequence is direct: ISRU operating mode (and therefore altitude-control authority) must be coordinated with the communications scheduling and payload duty cycle to avoid simultaneous peak demands. This is a software-level coupling between the GNS altitude controller, the CDHS scheduler, and the ISRU control loop - a coupling that is shown in the N\textsuperscript{2} matrix as a data interface but whose power implication is not captured there.
+

@@ -1,0 +1,102 @@
+
+
+\def\PageTopMargin{0in}
+\def\PageLeftMargin{0in}
+
+\newcommand\atxy[3]{
+    \AddThispageHook{
+        \smash{
+            \hspace*{
+                \dimexpr-\PageLeftMargin-\hoffset+#1\relax
+            }
+            \raisebox{
+                \dimexpr\PageTopMargin+\voffset-#2\relax
+            }{#3}
+        }
+    }
+}
+
+\newgeometry{top=1.4in,bottom=1in,left=2.5in,right=1.5in} 
+
+\atxy{0in}{0in}{
+    \rotatebox[origin=l]{-90}{
+        \makebox[9.75in]{
+            \parbox{9.75in}{
+                \hrulefill\\
+                \rotatebox[origin=l]{90}{
+                    \parbox{1in}{
+                        \vspace{2.5em}
+                        Acad. Year:\\2025-2026\\[1ex]
+                        Quarter:\\Q4\\[1ex]
+                        Course Code:\\AE3200\\[1ex]
+                        Submitted:\\ \today
+                    }
+                }\\[-0.85in]
+                \centerline{\hspace{3in}\textbf{\large%
+                    Venus In-situ Scientific and                 }}
+                \centerline{\hspace{3in}\textbf{\large%
+                    Technical Aerobot (VISTA)
+                }}
+               \centerline{\hspace{3in}\textbf{\large%
+                    Mission Midterm Report
+                }}
+                \rule[0pt]{0pt}{0pt}
+            }
+        }
+    }
+}
+\begin{titlepage}
+\begin{center}
+\textbf{AE3200 Design Synthesis Exercise}
+\vspace{0.5in}
+\end{center}
+
+\begin{center}
+\linespread{1}\huge\textbf{Venus In-situ Scientific and Technical Aerobot (VISTA)\\\bigskip Mission Midterm Report}
+\end{center}
+\vspace{0.1in}
+
+% \begin{figure}[H]
+%     \centering
+%     \includegraphics[width=0.5\linewidth]{image.png}
+%     \label{fig:placeholder}
+% \end{figure}
+
+
+
+\begin{center}
+\vspace{1.6in}
+\textbf{\Large Group 02}
+
+\begin{table}[h!]
+\centering
+\begin{tabular}{l c}
+\textbf{Name} & \textbf{Student Number} \\
+\hline
+Juliusz Ameljan-Kowalski  & 6021670 \\
+Filippos Atlasis          & 5694442\\
+Traian Bistriceanu        & 5992036\\
+Vadim Bodnarenco          & 5781027 \\
+Twan Burger               & 5792916 \\
+Bartosz Górny             & 5930952 \\
+Taran Kalma               & 5903831 \\
+Emil Wes Lambert          & 5689767 \\ 
+Nina Mamcarz              & 5906687 \\
+Beatriz Nunes Mascarenhas & 5932181 \\
+\end{tabular}
+\end{table}
+
+
+\vspace{1.8in}
+
+
+
+\textbf{Faculty of Aerospace Engineering}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.4\textwidth]{fig/logo.png}
+\end{figure}
+
+\end{center}
+\end{titlepage}
+

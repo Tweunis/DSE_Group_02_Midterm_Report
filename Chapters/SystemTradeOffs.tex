@@ -1,0 +1,83 @@
+\section{System-Level Architecture Trade-Off}
+\label{sec:arch_tradeoff}
+
+\subsection{Architecture Definition}
+\label{subsec:arch_definition}
+
+The subsystem chapters converge on a specific combination of design choices. To assess whether this combination is the best available at the system level, or whether a different combination of subsystem-level options would perform better overall, three candidate system architectures are defined. Each architecture fixes a consistent set of choices across the subsystems that are most strongly coupled (ISRU, Deployment, and Power), and accepts the other subsystem choices as common.
+
+\begin{description}
+    \item[Architecture~I (Selected subsystem baseline):] Balloon Option~2 (pre-filled N\textsubscript{2}, ISRU leakage top-up), Deployment $\alpha_{\mathrm{RX}}$-Mt3, Power solar + battery (hybrid not yet excluded). This is the combination implicit in the subsystem chapters.
+
+    \item[Architecture~II (Low entry mass):] Balloon Option~1 (He + ISRU gradual fill), Deployment $\alpha_{\mathrm{R3}}$-Mt2 (lighter COPV, heritage composite aeroshell), Power solar + battery with augmented ISRU power budget. This architecture accepts lower mission reliability in exchange for a dramatically lower entry mass ($\sim$93~kg ROM).
+
+    \item[Architecture~III (RTG-augmented):] Balloon Option~2, Deployment $\alpha_{\mathrm{RX}}$-Mt3, Power solar + RTG hybrid. RTG provides continuous nightside baseline power, eliminating the nightside energy storage problem and relaxing the ISRU duty-cycling constraint. Entry mass increases by RTG mass (typically $\sim$4-6~kg for a single MMRTG at $\sim$100-110~W\textsubscript{e} BOL).
+\end{description}
+
+\subsection{Trade-Off Criteria and Weights}
+\label{subsec:arch_criteria}
+
+The criteria and weights for the system-level trade-off are chosen to reflect the mission-level requirements and the cross-subsystem sensitivities identified in Section~\ref{sec:param_coupling}. They are not repeated from any single subsystem chapter.
+
+\begin{table}[h!]
+\centering
+\caption{System-level trade-off criteria and weights for candidate architecture comparison.}
+\label{tab:arch_criteria}
+\renewcommand{\arraystretch}{1.25}
+\begin{tabular}{p{0.5cm}p{4.0cm}p{0.8cm}p{8.0cm}}
+\hline
+\textbf{ID} & \textbf{Criterion} & \textbf{Weight} & \textbf{Definition and scoring basis} \\
+\hline
+C1 & 5-year mission reliability & 0.30 & Estimated total system reliability, propagating all known coupling effects. Score 5 if all known series terms keep the product above 0.90; score 1 if any known term breaks the product below 0.80. \\
+C2 & Power budget closure & 0.25 & Whether the combination of power source, storage, and consumer duty cycles closes within the 500~Wh storage constraint for the nightside case. Score 5 if closed with $>$20\% margin; score 1 if violation exceeds 50\%. \\
+C3 & Entry mass feasibility & 0.20 & ROM entry mass relative to launcher and cruise-stage capacity. Score 5 for $<$200~kg; score 3 for 200-400~kg (within REQ-C-MIS-02); score 1 if launcher constraint is violated. \\
+C4 & Operational complexity and autonomy & 0.15 & Number of concurrent mode constraints (power scheduling, ISRU duty cycling, altitude control, Doppler ranging window coordination). Score 5 if modes are largely independent; score 1 if $>$3 must be simultaneously satisfied with tight margins. \\
+C5 & Scientific output continuity & 0.10 & Ability to maintain continuous instrument operation (particularly the NMS and barometers) across the nightside without interruption. Score 5 if uninterrupted; score 3 if duty-cycling required; score 1 if nightside operations are infeasible. \\
+\hline
+\textbf{Total} & & \textbf{1.00} & \\
+\hline
+\end{tabular}
+\end{table}
+
+\subsection{Trade-Off Table and Scores}
+\label{subsec:arch_scores}
+
+\begin{table}[h!]
+\centering
+\caption{System-level architecture trade-off table. Scores 1-5; weighted total out of 5.}
+\label{tab:arch_scores}
+\renewcommand{\arraystretch}{1.25}
+\begin{tabular}{p{2.4cm}p{1.0cm}p{1.6cm}p{1.6cm}p{1.6cm}p{1.6cm}p{1.6cm}p{1.6cm}}
+\hline
+\textbf{Criterion} & \textbf{Wt.} & \multicolumn{2}{c}{\textbf{Architecture~I}} & \multicolumn{2}{c}{\textbf{Architecture~II}} & \multicolumn{2}{c}{\textbf{Architecture~III}} \\
+ & & Score & Wtd & Score & Wtd & Score & Wtd \\
+\hline
+C1 - Reliability & 0.30 & 3 & 0.90 & 2 & 0.60 & 4 & 1.20 \\
+C2 - Power closure & 0.25 & 3 & 0.75 & 2 & 0.50 & 4 & 1.00 \\
+C3 - Entry mass & 0.20 & 3 & 0.60 & 5 & 1.00 & 3 & 0.60 \\
+C4 - Complexity & 0.15 & 3 & 0.45 & 2 & 0.30 & 4 & 0.60 \\
+C5 - Science continuity & 0.10 & 3 & 0.30 & 2 & 0.20 & 4 & 0.40 \\
+\hline
+\textbf{Total} & \textbf{1.00} & & \textbf{3.00} & & \textbf{2.60} & & \textbf{3.80} \\
+\hline
+\end{tabular}
+\end{table}
+
+
+
+\section{Open System-Level Risks and Forward Actions}
+\label{sec:system_risks}
+
+The following risks are identified at the system level, distinct from the subsystem-level residual risks already documented in Chapters~\ref{chap:isru}-\ref{chap:power}.
+
+\begin{enumerate}
+    \item \textbf{500~Wh storage budget inconsistency.} The stated energy storage budget is inconsistent with the sum of known continuous power demands over a multi-day nightside period. This must be resolved by either (a) quantifying the duty-cycle schedule that makes the budget feasible for Architecture~I, or (b) adopting Architecture~III with RTG augmentation.
+
+    \item \textbf{Balloon envelope reliability as system reliability driver.} The balloon material reliability ($\approx$0.91) dominates the system series product and is the highest-leverage item for meeting REQ-C-MIS-03. The three residual risks identified for the Architecture~B laminate (CTE fatigue, seam acid ingress, foil pinhole population) must be addressed with a material qualification test campaign, not deferred to CDR. The four-subsystem cascade from a foil pinhole defect (Section~\ref{subsec:reliability_coupling}) must be explicitly modelled in the system-level PRA at the next design phase.
+
+    \item \textbf{ISRU-altitude control-power scheduling coupling.} The coordination of the PSA nitrogen separation cycle, the superpressure bladder altitude control, the payload duty cycle, and the communications window is a multi-constraint scheduling problem that must be demonstrated to close within the available power and data bandwidth margins. This is an autonomous operations design problem that does not appear in any single subsystem chapter.
+
+    \item \textbf{COPV-as-rib structural verification.} The $\varepsilon_1$ integration vector (COPVs as aeroshell ribs) is a key mass-saving coupling between the Deployment and Structures subsystems. The structural qualification path for a composite-to-COPV bond line in the Venus entry environment has not been defined. This is required before the 393~kg entry mass anchor can be considered verified.
+
+    \item \textbf{Payload dual-use hardware conflicts.} The barometers serve simultaneously as seismic infrasound sensors, altitude-reference instruments for GNS, and atmospheric pressure sensors. Their placement on the tether (Architecture~B, Chapter~\ref{chap:payload}) must be compatible with the GNS altitude controller's accuracy requirement and the thermal management strategy for external tethered hardware. This three-way interface has not been analysed.
+\end{enumerate}

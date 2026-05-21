@@ -1,0 +1,603 @@
+% ------------------------------------------------------------------
+% Document class
+% ------------------------------------------------------------------
+\documentclass[9pt]{report}
+
+% ------------------------------------------------------------------
+% Encoding, fonts, page layout
+% ------------------------------------------------------------------
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+% \usepackage{mathptmx} % Optional: Times-like font. Do not use with lmodern.
+\usepackage{titlesec}
+\usepackage{fncychap}
+% Colour definitions (add to preamble if not already defined)
+\usepackage{xltabular}
+\usepackage[
+  a4paper,
+  top=1in,
+  bottom=1in,
+  left=1in,
+  right=1in
+]{geometry}
+
+\usepackage{setspace}
+\AtBeginDocument{%
+  \setstretch{1}%
+  \setlength{\abovedisplayskip}{4pt plus 1pt minus 1pt}%
+  \setlength{\belowdisplayskip}{4pt plus 1pt minus 1pt}%
+  \setlength{\abovedisplayshortskip}{3pt plus 1pt minus 1pt}%
+  \setlength{\belowdisplayshortskip}{3pt plus 1pt minus 1pt}%
+}
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{1pt plus 0.5pt minus 0.5pt}
+
+\widowpenalty=10000
+\clubpenalty=10000
+\hyphenpenalty=10000
+\raggedbottom
+
+% ------------------------------------------------------------------
+% Core mathematics
+% ------------------------------------------------------------------
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{bm}
+\usepackage{caption}
+\usepackage{empheq}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+\usepgfplotslibrary{colormaps}
+\usepgfplotslibrary{fillbetween}
+\usetikzlibrary{positioning, intersections}
+\usepackage{float}
+
+% Allows optional alignment specifier in matrices:
+% \begin{matrix}[r] ... \end{matrix}
+\makeatletter
+\renewcommand*\env@matrix[1][*\c@MaxMatrixCols c]{%
+  \hskip -\arraycolsep
+  \let\@ifnextchar\new@ifnextchar
+  \array{#1}}
+\makeatother
+
+% Tighter but not obviously compressed spacing
+% Compact spacing for page-budget version.
+\titlespacing{\section}{0pt}{0.65ex plus 0.2ex minus 0.15ex}{0.25ex}
+\titlespacing{\subsection}{0pt}{0.45ex plus 0.15ex minus 0.1ex}{0.15ex}
+\titlespacing{\subsubsection}{0pt}{0.3ex plus 0.1ex minus 0.1ex}{0.1ex}
+\titlespacing{\paragraph}{0pt}{0.25ex plus 0.1ex minus 0.1ex}{0.5em}
+\titlespacing{\subparagraph}{0pt}{0.2ex plus 0.1ex minus 0.1ex}{0.5em}
+
+
+\setlength{\textfloatsep}{5pt plus 1pt minus 1pt}
+\setlength{\floatsep}{4pt plus 1pt minus 1pt}
+\setlength{\intextsep}{4pt plus 1pt minus 1pt}
+\setlength{\dbltextfloatsep}{5pt plus 1pt minus 1pt}
+\setlength{\dblfloatsep}{4pt plus 1pt minus 1pt}
+
+
+\captionsetup{
+  skip=3pt,
+  belowskip=0pt
+}
+
+% ------------------------------------------------------------------
+% Tables
+% ------------------------------------------------------------------
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{tabularx}
+\usepackage{xltabular}
+\usepackage{multirow}
+\usepackage{multicol}
+\usepackage{makecell}
+\usepackage{diagbox}
+\usepackage{threeparttable}
+\usepackage{colortbl}
+\usepackage[table]{xcolor}
+\usepackage{siunitx}
+\usepackage{ragged2e}
+\usepackage{adjustbox}
+\usepackage{pifont}
+\usepackage{flafter}
+\usepackage{graphicx}
+\usepackage{subcaption}
+
+\newcolumntype{R}{>{\raggedleft\arraybackslash}X}
+\newcolumntype{L}{>{\raggedright\arraybackslash}X}
+\newcolumntype{C}{>{\centering\arraybackslash}X}
+
+% ------------------------------------------------------------------
+% Figures, floats, graphics
+% ------------------------------------------------------------------
+\usepackage{graphicx}
+\usepackage{subcaption}
+\usepackage{caption}
+\usepackage{float}
+\usepackage{placeins}
+\usepackage{pdfpages}
+\usepackage{pdflscape}
+\usepackage{rotating}
+\usepackage{eso-pic}
+\usepackage{everypage}
+\usepackage{afterpage}
+\usepackage{wrapfig}
+\usepackage{emptypage}
+
+\makeatletter
+\setlength{\@fptop}{0pt}
+\makeatother
+
+\setlength{\floatsep}{6pt plus 2pt minus 2pt}
+
+\newenvironment{Figure}
+  {\noindent\begin{minipage}{\linewidth}}
+  {\end{minipage}}
+
+% ------------------------------------------------------------------
+% TikZ and diagrams
+% ------------------------------------------------------------------
+\usepackage{tikz}
+\usetikzlibrary{
+  arrows.meta,
+  positioning,
+  shapes.geometric,
+  calc,
+  fit,
+  backgrounds,
+  shadows.blur
+}
+
+\usepackage{pgfgantt}
+
+% ------------------------------------------------------------------
+% Lists, code, boxes
+% ------------------------------------------------------------------
+\usepackage{enumitem}
+\usepackage{algpseudocode}
+\usepackage{listings}
+\usepackage{tcolorbox}
+\usepackage{mdwlist}
+\usepackage{moresize}
+
+% ------------------------------------------------------------------
+% Captions, headings, headers
+% ------------------------------------------------------------------
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+\usepackage{appendix}
+
+\setlist{
+  nosep,
+  topsep=1pt plus 0.5pt minus 0.5pt,
+  partopsep=0pt,
+  parsep=0pt,
+  itemsep=0pt,
+  leftmargin=*
+}
+\setlist[description]{
+  nosep,
+  topsep=1pt plus 0.5pt minus 0.5pt,
+  partopsep=0pt,
+  parsep=0pt,
+  itemsep=0pt,
+  leftmargin=1.5em,
+  labelsep=0.5em
+}
+
+
+\titlespacing{\chapter}{0pt}{0pt}{0.4ex}
+
+\titleformat{\chapter}[block]
+  {\bfseries\LARGE\centering}
+  {\chaptertitlename\ \thechapter:}
+  {1em}
+  {}
+  [\rule{\textwidth}{0.3pt}]
+
+\titleformat{\section}
+  {\bfseries\large}
+  {\thesection}
+  {1em}
+  {}
+
+\titleformat{\subsection}
+  {\normalfont\bfseries}
+  {\thesubsection}
+  {1em}
+  {}
+
+\titleformat{\subsubsection}
+  {\normalfont\bfseries}
+  {\thesubsubsection}
+  {1em}
+  {}
+
+\setcounter{secnumdepth}{5}
+
+% ------------------------------------------------------------------
+% Nomenclature
+% ------------------------------------------------------------------
+\usepackage{nomencl}
+\makenomenclature
+
+\newcommand{\nomunit}[1]{%
+  \renewcommand{\nomentryend}{\hspace*{\fill}#1}}
+
+\setlength{\nomlabelwidth}{3cm}
+\setlength{\nomitemsep}{-0.5\parsep}
+
+% ------------------------------------------------------------------
+% Bibliography
+% ------------------------------------------------------------------
+\usepackage[style=numeric,sorting=none]{biblatex}
+\addbibresource{References.bib}
+
+\DeclareSourcemap{
+  \maps[datatype=bibtex]{
+    \map{
+      \step[
+        fieldsource=title,
+        match=\regexp{\b([A-Z]{2,})\b},
+        replace={{}{$1}}
+      ]
+    }
+  }
+}
+
+% ------------------------------------------------------------------
+% Links and URLs
+% ------------------------------------------------------------------
+\usepackage{url}
+\usepackage[colorlinks=true,allcolors=black]{hyperref}
+
+% ------------------------------------------------------------------
+% Appendix figure/table caption types
+% ------------------------------------------------------------------
+\DeclareCaptionType{appfigure}[Figure]
+\DeclareCaptionType{apptable}[Table]
+
+\renewcommand{\listappfigurename}{List of Appendix Figures}
+\renewcommand{\listapptablename}{List of Appendix Tables}
+
+\renewcommand{\thefigure}{\thechapter-\arabic{figure}}
+\renewcommand{\thetable}{\thechapter-\arabic{table}}
+\renewcommand{\theappfigure}{\thechapter-\arabic{appfigure}}
+\renewcommand{\theapptable}{\thechapter-\arabic{apptable}}
+\renewcommand{\contentsname}{Table of Contents}
+
+% ------------------------------------------------------------------
+% Status commands
+% ------------------------------------------------------------------
+\newcommand{\stOK}{\textcolor{green!55!black}{\ding{52}}\,OK}
+\newcommand{\stTBD}{\textcolor{orange!85!black}{\ding{224}}\,TBD}
+\newcommand{\stPart}{\textcolor{orange!85!black}{\ding{224}}\,Partial}
+\newcommand{\stGreen}{\textcolor{green!55!black}{$\blacksquare$}\,Green}
+\newcommand{\stYellow}{\textcolor{orange!85!black}{$\blacksquare$}\,Yellow}
+\newcommand{\stOff}{\textcolor{black!45}{$\square$}\,Not-owned}
+
+% ------------------------------------------------------------------
+% Colours
+% ------------------------------------------------------------------
+\definecolor{riskgreen}{RGB}{0,176,80}
+\definecolor{riskyellow}{RGB}{255,192,0}
+\definecolor{riskred}{RGB}{192,0,0}
+
+\definecolor{vistaBlue}{HTML}{1F4E79}
+\definecolor{vistaBlueDark}{HTML}{173B5C}
+\definecolor{vistaGreen}{HTML}{2E7D5B}
+\definecolor{vistaGreenDark}{HTML}{1F5B42}
+\definecolor{vistaLeaf}{HTML}{F7F9FB}
+\definecolor{vistaLeafBorder}{HTML}{CAD3DC}
+\definecolor{vistaText}{HTML}{1E2933}
+\definecolor{vistaLine}{HTML}{6B7785}
+\definecolor{vistaBg}{HTML}{F3F6F9}
+
+\definecolor{kept}{RGB}{22,101,52}
+\definecolor{elim}{RGB}{185,28,28}
+\definecolor{blockerbg}{RGB}{241,245,249}
+\definecolor{blockerborder}{RGB}{203,213,225}
+\definecolor{blockertext}{RGB}{71,85,105}
+ 
+\newcommand{\kept}[1]{\textcolor{kept}{\textbf{#1}}}
+\newcommand{\elim}[1]{\textcolor{elim}{\textbf{#1}}}
+\newcommand{\blocker}[1]{%
+  \,\fcolorbox{blockerborder}{blockerbg}{\footnotesize\textcolor{blockertext}{\texttt{#1}}}%
+}
+ 
+
+% ------------------------------------------------------------------
+% Listings style
+% ------------------------------------------------------------------
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.95}
+
+\newcommand{\codesize}{\small}
+
+\lstdefinestyle{mystyle}{
+  backgroundcolor=\color{backcolour},
+  commentstyle=\color{codegreen},
+  keywordstyle=\color{magenta},
+  numberstyle=\tiny\color{codegray},
+  stringstyle=\color{codepurple},
+  basicstyle=\ttfamily\codesize,
+  breakatwhitespace=true,
+  breaklines=true,
+  captionpos=b,
+  keepspaces=false,
+  numbers=left,
+  numbersep=5pt,
+  showspaces=false,
+  showstringspaces=false,
+  showtabs=false,
+  tabsize=2,
+  showlines=true,
+  fontadjust=true,
+  framexleftmargin=10pt,
+  resetmargins=true,
+  basewidth=0.5em
+}
+
+\lstset{style=mystyle}
+
+% ------------------------------------------------------------------
+% Mathematics shorthands
+% ------------------------------------------------------------------
+\newcommand{\Cnum}{\mathbb{C}}
+\newcommand{\Rnum}{\mathbb{R}}
+\newcommand{\Znum}{\mathbb{Z}}
+
+\renewcommand{\d}{\mathrm{d}}
+
+% Avoid redefining \bf. Use \mathbf directly instead.
+% \renewcommand{\bf}[1]{\mathbf{#1}}
+
+\newcommand{\argmax}[1]{\underset{#1}{\operatorname{arg\,max}}}
+\newcommand{\kurt}{\mathrm{kurt}}
+\newcommand{\round}{\operatorname{round}}
+\newcommand{\E}{\operatorname{E}}
+\newcommand{\cov}{\operatorname{cov}}
+\newcommand{\pcov}{\operatorname{pcov}}
+
+\newcommand*{\vertbar}{\rule[-1ex]{0.5pt}{2.5ex}}
+\newcommand*{\horzbar}{\rule[.5ex]{2.5ex}{0.5pt}}
+
+\usepackage{todonotes}
+
+% PDF page insertion
+\usepackage{pdfpages}
+\usepackage{tikz}
+
+% Caption overlay for inserted full-page PDFs
+\newcommand{\DOTDepCaption}{%
+  \begin{tikzpicture}[remember picture,overlay]
+    \node[
+      anchor=south,
+      yshift=8mm,
+      align=center
+    ] at (current page.south) {%
+      \small\textbf{Figure~\thefigure:} Design Option Tree Deployment%
+    };
+  \end{tikzpicture}%
+}
+
+% ------------------------------------------------------------------
+% Compatibility helpers for older chapter files / template commands
+% ------------------------------------------------------------------
+
+% Needed if any chapter uses \euro
+\usepackage{eurosym}
+
+% Needed for older text symbols such as \textdegree, etc.
+\usepackage{textcomp}
+\AtBeginDocument{\setstretch{1}}
+% Safety fallback for old title-page overlay macro
+\providecommand{\AddThispageHook}[1]{%
+  \AddToHookNext{shipout/foreground}{#1}%
+}
+
+\usepackage{tocloft}
+
+% Reduce vertical spacing in TOC
+\setlength{\cftbeforechapskip}{2pt}
+\setlength{\cftbeforesecskip}{0pt}
+\setlength{\cftbeforesubsecskip}{0pt}
+
+% ------------------------------------------------------------------
+% Score colours for trade-off tables
+% ------------------------------------------------------------------
+\definecolor{score5}{RGB}{0,176,80}   % dark green
+\definecolor{score4}{RGB}{146,208,80} % light green
+\definecolor{score3}{RGB}{255,255,0}  % yellow
+\definecolor{score2}{RGB}{255,192,0}  % orange
+\definecolor{score1}{RGB}{255,0,0}    % red
+
+% Trade-off table helper:
+% Usage: \scorecell{score}{text}
+% Empty score is allowed: \scorecell{}{text}
+\newcommand{\scorecell}[2]{%
+  \begingroup
+  \if\relax\detokenize{#1}\relax
+    #2%
+  \else
+    \cellcolor{score#1!35}%
+    \textbf{#1}\par #2%
+  \fi
+  \endgroup
+}
+
+% Legacy maths shortcuts from the old template
+\providecommand{\C}{\mathbb{C}}
+\providecommand{\R}{\mathbb{R}}
+\providecommand{\Z}{\mathbb{Z}}
+
+% Common table/checkmark helpers if used elsewhere
+\providecommand{\cmark}{\textcolor{green!55!black}{\ding{52}}}
+\providecommand{\xmark}{\textcolor{red!70!black}{\ding{56}}}
+
+% Degree symbol helper if chapters use \degree
+\providecommand{\degree}{^\circ}
+
+\begin{document}
+\fontsize{9pt}{10.5pt}\selectfont
+\sloppy
+%==== FRONT PART====
+\include{Front/titlepage}
+
+%\begingroup
+%\let\cleardoublepage\clearpage
+\pagenumbering{roman}
+\pagestyle{fancy}
+\fancyhf{}
+\cfoot{\thepage}
+
+\renewcommand{\chaptermark}[1]{\markboth{#1}{}}
+\renewcommand{\sectionmark}[1]{}
+
+\fancyhead[L]{\nouppercase{\leftmark}}
+\fancyhead[R]{}
+
+\fancypagestyle{plain}{%
+  \fancyhf{}%
+  \cfoot{\thepage}%
+  \fancyhead[L]{\nouppercase{\leftmark}}%
+  \fancyhead[R]{}%
+}
+%\endgroup
+
+\newgeometry{top=0.8in,bottom=0.8in,left=1in,right=1in}
+\makeatletter
+\setlength{\headwidth}{\textwidth}
+\makeatother
+
+\makeatletter
+\renewcommand\normalsize{%
+   \@setfontsize\normalsize{9pt}{10.5pt}
+}
+\renewcommand\small{%
+   \@setfontsize\small{8pt}{9.5pt}
+}
+\renewcommand\footnotesize{%
+   \@setfontsize\footnotesize{7pt}{8pt}
+}
+\renewcommand\large{%
+   \@setfontsize\large{10pt}{11pt}
+}
+\renewcommand\Large{%
+   \@setfontsize\Large{11pt}{12pt}
+}
+\makeatother
+
+\include{Front/Graphical_Abstract}
+\newpage
+
+\include{Front/Acknowledgement}
+\newpage
+\setcounter{tocdepth}{1}
+
+%  === EXECUTIVE OVERVIEW ===
+\input{Front/ExecutiveOverview}
+
+\newpage
+\vspace*{-2cm}
+{\footnotesize
+\singlespacing
+\begin{spacing}{1}
+\tableofcontents
+\end{spacing}
+}
+\newpage
+
+\include{Front/Nomenclature}
+\newpage
+
+%\renewcommand{\listfigurename}{Lists of Figures}
+%\rhead{Lists of Figures}
+%\listoffigures 
+%\addcontentsline{toc}{chapter}{Lists of Figures}
+
+\newpage
+
+
+%\listoftables 
+%\addcontentsline{toc}{chapter}{Lists of Tables}
+%\rhead{Lists of Tables}
+%\newpage
+
+\rhead{}
+
+%==== MAIN PART ====
+\pagenumbering{arabic}
+%==================== FRONT MATTER ====================
+
+
+%==================== MAIN BODY ====================
+\renewcommand{\arraystretch}{0.9}
+\input{Front/Introduction}
+\input{Chapters/Chapter_Mission_Definition}
+\input{Chapters/Chapter_N2}
+\input{Chapters/Chapter_Instrumentation}
+\input{Chapters/Chapter_ISRU}
+\input{Chapters/Chapter_Communications}
+\input{Chapters/Chapter_Thermal}
+\input{Chapters/Chapter_Navigation}
+\input{Chapters/Chapter_Power}
+\input{Chapters/Chapter_ADCS}
+\input{Chapters/Chapter_Structures}
+\input{Chapters/Chapter_Deployment}
+\input{Chapters/Chapter_Technical_risk_assessment}
+
+\input{Chapters/Chapter_Tradeoff}
+\input{Chapters/Chapter_V&V}
+% \input{Chapters/Chapter_Project_Plan_Update} % MOVED TO THE APPENDIX
+\input{Results/Conclusion and Future Work}
+
+
+
+% (Optional) Example table file — include where relevant
+% \lhead{Example Table}
+% \input{\detokenize{Chapters/EXAMPLE  TABLE.tex}}
+
+
+%==== ENDING PART ===
+\addcontentsline{toc}{chapter}{References}
+  \clearpage
+  \pagenumbering{arabic}%
+  \renewcommand{\thepage}{R-\arabic{page}}
+\lhead{}
+\rhead{References}
+
+\begin{spacing}{0.75}
+
+{\scriptsize
+
+\renewcommand{\arraystretch}{0.65}
+
+\printbibliography[title={References}]}
+
+\end{spacing}
+
+If you want it even tighter, use `\tiny` instead of `\scriptsize`, but `\scriptsize` is usually the lowest that still looks professional in reports.
+
+%==================== BACK MATTER ====================
+
+\newpage
+\appendix
+\renewcommand{\chapname}{Appendix}
+\pretocmd{\chapter}{%
+  \clearpage
+  \pagenumbering{arabic}%
+  \renewcommand*{\thepage}{\thechapter-\arabic{page}}}{}{}
+\lhead{Appendix}
+\include{Appendix/Appendix}
+ % see https://tex.stackexchange.com/questions/119719/add-an-item-in-the-table-of-contents
+
+
+%==== END OF ALL ===
+\end{document}

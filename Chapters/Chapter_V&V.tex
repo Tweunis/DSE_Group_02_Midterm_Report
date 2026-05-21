@@ -1,0 +1,245 @@
+\chapter{Verification \& Validation Procedures}
+
+The verification and validation (V\&V) programme for the Venus aerial balloon platform is structured in accordance with the European Cooperation for Space Standardization standard ECSS-E-ST-10-02C Rev.1 \cite{ECSS_VER} and its companion handbook ECSS-E-HB-10-02A \cite{ECSS_HB}. In the ECSS framework, verification demonstrates that the delivered system meets its specified requirements, while validation confirms that those requirements correctly address the mission's intended use. 
+
+The V\&V process is structured around three sequential activities: verification planning, verification execution and reporting, and verification control and close-out. Planning is conducted top-down from mission-level requirements to system requirements. Meanwhile, execution and reporting proceeds bottom-up from component acceptance through system qualification. 
+% No verification and validation will be performed in this phase of the design, as this falls out of the scope of this feasibility study. 
+
+\section{Verification Approach}
+
+Per ECSS-E-ST-10-02C, four verification methods are available and are applied to each system requirement of the VISTA mission:
+
+\begin{itemize}[itemsep=1pt, parsep=1pt]
+    \item Test (T): Measurement of product performance and functions under representative simulated environments. Test is the preferred method as it provides the highest confidence in verification of performance and design. All safety-critical requirements must be verified by test.
+    \item Analysis (A): Theoretical or empirical evaluation using agreed analytical techniques, including computational simulation and modelling. Analysis is used where full flight conditions cannot be simulated on the ground, or where testing the full spectrum of conditions is not economically feasible.
+    \item Review of Design (R): Use of approved records and evidence from past missions and design documents that unambiguously demonstrate a requirement is met.
+    \item Inspection (I): Visual determination of physical characteristics. 
+\end{itemize}
+
+% For any requirement verified solely by Analysis or Review of Design, a risk assessment is conducted to determine whether the impact on the mission is major or minor. Where the impact is judged major, a cross-check using two independent analyses from separate teams and models is required as part of the Verification Plan.
+
+Verification is conducted at three levels: equipment level, subsystem level, and system level. The V\&V plan at subsystem level is presented at their corresponding subsystem chapter. For this chapter, only system level testing will be considered. That is, the V\&V plan for the fully integrated gondola platform, including the balloon envelope, tethered barometer array, and all deployed interfaces.
+
+\section{Verification Model Philosophy}
+
+The model philosophy defines the optimum set of physical models required to achieve confidence in the product verification, balancing cost, schedule, and risk. For the Venus aerial balloon platform, a hybrid model philosophy is adopted, comprising three model types:
+
+\begin{enumerate}[itemsep=1pt, parsep=1pt]
+    \item Engineering Model (EM): Flight representative in form and function - the difference with respect to the Flight Model is lack of high-reliability parts and no full redundancy. Used for functional qualification, interface verification, failure survival demonstrations, and to validate ground support equipment and test facilities. The EM is also used to develop and validate the software verification environment before integration onto the PFM.
+    \item Structural-Thermal Model (STM): Combines the objectives of the Structural Model and Thermal Model. Fully representative of the mechanical and thermal properties of the gondola platform. Used for qualification of the structural design under launch loads and the thermal design under Venus float hot and cold cases, and for correlation of finite element and thermal mathematical models. The STM comprises a representative structure equipped with mass and thermal dummies of flight equipment.
+    \item Protoflight Model (PFM): The flight end product, on which a protoflight qualification and acceptance test campaign is performed before flight. This is applicable to all levels of the system. 
+\end{enumerate}
+
+This hybrid approach is selected because it permits advanced structural and thermal qualification on the STM in parallel with functional development on the EM, reducing schedule risk, while the protoflight approach on the PFM avoids the cost of a separate dedicated qualification model. 
+
+% The model philosophy is summarised in Table~\ref{tab:model_philosophy}.
+
+% \begin{table}[H]
+% \centering
+% \caption{Summary of model philosophy for the Venus aerial balloon platform.}
+% \label{tab:model_philosophy}
+% \renewcommand{\arraystretch}{1.3}
+% \begin{tabular}{llll}
+% \toprule
+% \textbf{Model} & \textbf{Primary Objective} & \textbf{Test Programme} & \textbf{Utilisation} \\
+% \midrule
+% EM  & Functional qualification, I/F verification & Functional, EMC & Ground support \\
+% STM & Structural and thermal qualification & Vibration, shock, TVac & Disposal post-test \\
+% PFM & Protoflight qualification + flight use & Protoflight, acceptance & Flight \\
+% \bottomrule
+% \end{tabular}
+% \end{table}
+
+\section{System-Level Test Campaign}
+
+The system-level test campaign is conducted on the STM and PFM in sequential phases. All equipment and subsystem qualification must be completed before system-level testing commences. The main system-level test events are described in the following subsections.
+
+\subsection{Structural, Mechanical, and Thermal Balance Tests (STM)}
+
+The STM undergoes a full structural qualification test campaign. Launch vibration loads are applied to the gondola primary structure including the tether attachment interface, instrument mounting points, and the rib structure retained from the deployment stage. Acoustic and shock tests are conducted to qualify the gondola against the launch environment of the target launcher. Structural margins are verified against requirements REQ-C-LAU-01 and REQ-C-LAU-02. The STM is also used to validate the GSE handling interfaces and integration procedures.
+
+% The test programme covers the Venus float hot case (52\,km, maximum solar input, maximum instrument dissipation) and the cold case (62\,km, night side, minimum power). As noted by 
+Lorenz~\cite{Lorenz2018}, planetary in-situ test environments cannot fully replicate target atmospheric conditions on the ground; the thermal-vacuum test therefore targets the dominant thermal phenomena - absorbed solar flux, internal dissipation, and radiative exchange - at representative pressure levels approximating 52-62\,km Venus conditions, rather than attempting full atmospheric composition replication. In-flight thermal anomalies are generally attributable to differences between static test chamber conditions and dynamic flight conditions rather than to atmospheric composition \cite{Lorenz2018}. The thermal mathematical model is correlated against the STM test results and used to predict in-flight performance. This campaign verifies requirements REQ-C-ENV-01, REQ-C-ENV-02, REQ-F-ENV-03, and REQ-F-ENV-04.
+
+\subsection{Functional and Electromagnetic Compatibility Tests (EM)}
+
+The Engineering Model undergoes a full functional qualification campaign covering all nominal and redundant operational modes. Interface verification is conducted between all subsystems at the system level: the dual helical-ring antenna chain (transmit/receive), the IMU/ADCS chain with simulated Doppler-ranging inputs, the PSA leakage top-up control loop, and the instrument data acquisition pipeline from all nine science instruments. Electromagnetic compatibility testing verifies that the dual helical-ring antenna architecture does not produce mutual interference, and that no instrument is degraded by the communications subsystem. Software is verified in the target hardware environment on the EM in accordance with ECSS-E-ST-40. End-to-end communication chain testing with a simulated relay orbiter contact is conducted to verify REQ-C-SUB-05.
+
+\subsection{Entry, Descent, and Deployment Test (PFM)}
+
+The DEP subsystem is an independent unit that operates autonomously through the EDLI phase before jettison. Because deployment failure forfeits the entire platform, the deployment sequence is a safety-critical function and \emph{must} be verified by test. The protoflight test campaign includes a full deployment sequence test exercising the cascaded COPV inflation string and the $\alpha$RX-Mt3 redundancy architecture, verifying balloon envelope deployment without tearing, snagging, or entanglement in accordance with REQ-F-DEP-03. Dynamic stability during re-entry is verified per REQ-F-DEP-08, and structural integrity under re-entry loads is verified per REQ-C-DEP-07. The launch-locking mechanism release sequence is tested per REQ-F-LAU-05, which carries a red-flag safety-critical designation in the requirements baseline.
+
+\subsection{Earth Stratospheric Analogue Flight (PFM)}
+
+Following terrestrial qualification, a reduced-scale Earth stratospheric balloon flight is conducted to validate system-level float performance in an environment approximating the temperature and density of the Venus middle cloud layer. This approach follows the precedent established by the JPL Venus aerobot prototype flights, in which a one-third scale platform was flown over Nevada's Black Rock Desert to altitudes replicating the conditions expected at 55\,km above Venus~\cite{JPL2022}. The analogue flight validates: float altitude stability, tether pendulum dynamics of the barometer array under realistic atmospheric turbulence, solar array power generation under flight conditions, and instrument data acquisition in a dynamically floating platform environment. GNC position propagation between simulated relay orbiter passes is also validated by recording the full IMU data stream and applying the Doppler anchoring algorithm in post-processing.
+
+\section{Verification Control Document}
+
+The Verification Control Document (VCD) is the master tracking matrix that records, for each system-level requirement: the requirement text, the assigned verification method(s), the model on which verification is performed, the applicable verification stage, references to the evidence documents (test reports, analysis reports, review-of-design reports, inspection reports), the compliance status, and the close-out status. The VCD is initialised at Phase~B and maintained throughout the project life cycle until final close-out is approved by the Verification Control Board.
+
+Table~\ref{tab:vcd} presents the initial issue of the system-level VCD for the Venus aerial balloon platform, covering all annotated requirements from the mission requirements baseline.
+
+\newcommand{\crit}{\cellcolor{red!20}}
+
+{\small
+\renewcommand{\arraystretch}{1}
+\begin{longtable}{p{2.85cm} p{6.2cm} p{1.2cm} p{1.6cm} p{1.8cm}}
+\caption{System-level Verification Control Document (initial issue). Red shading denotes safety-critical requirements that must be verified by test. Methods: T = Test, A = Analysis, R = Review of Design, I = Inspection.}
+\label{tab:vcd} \\
+\toprule
+\textbf{Req. ID} & \textbf{Requirement} & \textbf{Method} & \textbf{Model} & \textbf{Stage} \\
+\midrule
+\endfirsthead
+\multicolumn{5}{c}{\tablename\ \thetable{} - continued}\\
+\toprule
+\textbf{Req. ID} & \textbf{Requirement} & \textbf{Method} & \textbf{Model} & \textbf{Stage} \\
+\midrule
+\endhead
+\midrule
+\multicolumn{5}{r}{\textit{Continued on next page}}\\
+\endfoot
+\bottomrule
+\endlastfoot
+
+\multicolumn{5}{l}{\textbf{Mission Requirements}} \\
+\midrule
+
+REQ-C-MIS-01 & The aerobot operational lifetime shall be at least 5 Earth years. & \textbf{A} & EM, PFM & Qualification \\
+REQ-C-MIS-02 & Total aerobot system mass shall not exceed 700\,kg. & \textbf{I} & PFM & Acceptance \\
+REQ-C-MIS-03 & Each aerobot shall have a survival probability greater than 90\% over the 5-year mission. & \textbf{A} & EM & Qualification \\
+REQ-F-MIS-04 & The design shall incorporate the use of atmospheric nitrogen to compensate for helium leakage. & \textbf{R} & - & Qualification \\
+REQ-C-MIS-05 & All subsystems shall have a minimum Technology Readiness Level of 4. & \textbf{R} & - & Qualification \\
+REQ-C-MIS-06 & The aerobot shall be able to adjust its operating altitude at a rate of TBD. & \textbf{A} & EM, PFM & Qualification \\
+
+\midrule
+\multicolumn{5}{l}{\textbf{Launch Requirements}} \\
+\midrule
+
+REQ-C-LAU-01 & The S/C shall be compatible with TBD loads involved in launch. & \textbf{T} & STM & Qualification \\
+REQ-C-LAU-02 & The S/C shall be compatible with TBD vibrations involved in launch. & \textbf{T} & STM & Qualification \\
+REQ-C-LAU-03 & The S/C shall be compatible with the TBD volume envelope of the launcher. & \textbf{I} & PFM & Acceptance \\
+REQ-F-LAU-04 & The balloon inflation and deployment mechanism shall not be activated before Venus entry. & \textbf{T}, \textbf{R} & PFM & Qualification, Pre-launch \\
+\crit REQ-F-LAU-05 & \crit All launch-locking mechanisms shall be released after arrival at Venus without preventing deployment. & \crit\textbf{T} & \crit PFM & \crit Qualification \\
+\crit REQ-F-LAU-06 & \crit Pre-launch integration tests shall be performed to verify the interfacing compatibility of the capsule, launcher, spacecraft, and aerobot. & \crit\textbf{T} & \crit PFM & \crit Pre-launch \\
+
+\midrule
+\multicolumn{5}{l}{\textbf{Balloon Entry and Deployment Requirements}} \\
+\midrule
+
+REQ-F-DEP-01 & The aerobot(s) shall be compatible with deployment from a Venus orbiter with a 24-hour elliptical orbit acting as a data relay. & \textbf{R} & - & Qualification \\
+REQ-C-DEP-02 & The aerobot(s) shall be deployable to an operational altitude of TBD\,km. & \textbf{I} & PFM & Qualification \\
+\crit REQ-F-DEP-03 & \crit The balloon envelope shall deploy without tearing, snagging, or entanglement with the gondola, parachute, or aeroshell. & \crit\textbf{T} & \crit PFM & \crit Qualification \\
+REQ-F-DEP-04 & The aerobot(s) shall support post-deployment status assessment and confirmation of successful deployment. & \textbf{T} & PFM & Qualification, Commissioning \\
+REQ-C-DEP-06 & The aerobot shall not vent at least TBD\% of stored TBD gas into the balloon before reaching TBD altitude. & \textbf{A} & PFM & Qualification \\
+\crit REQ-C-DEP-07 & \crit The system shall sustain at least all the TBD loads experienced during re-entry. & \crit\textbf{T} & \crit STM & \crit Qualification \\
+REQ-F-DEP-08 & The system shall ensure dynamic stability of the aerobot during re-entry and deployment. & \textbf{T} & PFM & Qualification \\
+REQ-F-DEP-09 & The aerobot and all supporting systems shall be compatible with the dimensional constraints of the entry capsule. & \textbf{I} & PFM & Acceptance \\
+
+\midrule
+\multicolumn{5}{l}{\textbf{Sub-system Budget Requirements}} \\
+\midrule
+
+REQ-C-SUB-01 & Gondola mass shall not exceed 200\,kg. & \textbf{I} & PFM & Acceptance \\
+REQ-C-SUB-02 & Balloon envelope mass shall not exceed 100\,kg. & \textbf{I} & PFM & Acceptance \\
+REQ-C-SUB-03 & Inflation system mass shall not exceed 150\,kg. & \textbf{I} & PFM & Acceptance \\
+REQ-C-SUB-04 & Aeroshell and parachute mass shall not exceed 250\,kg. & \textbf{I} & PFM & Acceptance \\
+REQ-C-SUB-05 & Data transmission rate shall not exceed 1500\,bps. & \textbf{T} & EM & Qualification \\
+REQ-C-SUB-06 & Total onboard energy storage shall not exceed 500\,Wh. & \textbf{T} & EM, PFM & Qualification, Acceptance \\
+REQ-C-SUB-07 & The balloon leakage shall be no more than TBD\,cm\textsuperscript{3}\,m\textsuperscript{-2}\,day\textsuperscript{-1}. & \textbf{T} & PFM & Qualification \\
+
+\midrule
+\multicolumn{5}{l}{\textbf{Science Requirements}} \\
+\midrule
+
+REQ-F-SCI-01 & The system shall perform aerosol sampling and detailed chemical analysis of clouds at least once per month. & \textbf{R} & - & Qualification \\
+REQ-F-SCI-02 & The sampling system shall not affect the chemical composition of the sample. & \textbf{T} & EM & Qualification \\
+REQ-C-SCI-03 & The maximum altitude separation between samples shall be TBD\,km. & \textbf{R} & - & Qualification \\
+REQ-C-SCI-04 & The altitude accuracy of sampling shall be TBD\,km. & \textbf{T} & EM, PFM & Qualification \\
+REQ-C-SCI-05 & The S/C shall be able to measure vertical wind speed at TBD intervals. & \textbf{R} & - & Qualification \\
+REQ-F-SCI-06 & The S/C shall include TBD measurement systems to detect any seismic activity. & \textbf{R} & - & Qualification \\
+REQ-F-SCI-07 & The S/C shall be able to measure cloud dynamics at TBD intervals. & \textbf{R} & - & Qualification \\
+REQ-F-SCI-08 & The S/C shall be able to measure horizontal wind speed at TBD intervals. & \textbf{R} & - & Qualification \\
+REQ-F-SCI-09 & The mission shall address the VEXAG roadmap goals. & \textbf{R} & - & Qualification \\
+REQ-F-SCI-10 & The S/C shall be able to measure the temperature of the Venusian atmosphere. & \textbf{T} & EM, PFM & Qualification, Commissioning \\
+REQ-F-SCI-11 & The S/C shall be able to measure the pressure of the Venusian atmosphere. & \textbf{T} & EM, PFM & Qualification, Commissioning \\
+
+\midrule
+\multicolumn{5}{l}{\textbf{Survive Operating Environment}} \\
+\midrule
+
+\crit REQ-C-ENV-01 & \crit The aerobot shall tolerate the range of atmospheric pressure of TBD-TBD\,Pa. & \crit\textbf{T} & \crit STM, PFM & \crit Qualification \\
+\crit REQ-C-ENV-02 & \crit The aerobot shall tolerate the atmospheric temperature range of TBD-TBD\,K. & \crit\textbf{T} & \crit STM, PFM & \crit Qualification \\
+REQ-F-ENV-03 & The aerobot(s) properties shall not degrade more than TBD\% in TBD years in Venus' toxic atmosphere. & \textbf{A} & EM & Qualification \\
+REQ-F-ENV-04 & The aerobot shall withstand the TBD radiation experienced during the entire mission duration. & \textbf{A} & - & Qualification \\
+
+\midrule
+\multicolumn{5}{l}{\textbf{External Compliance Requirements}} \\
+\midrule
+
+REQ-OP-COMP-01 & The mission shall comply with COSPAR planetary protection guidelines regarding atmospheric contamination. & \textbf{R} & - & Qualification \\
+REQ-C-COMP-02 & Total mission cost shall not exceed 400 million euros in FY2026, including operations. & \textbf{R} & - & Qualification \\
+REQ-C-COMP-03 & The S/C shall fit inside the required launch window of late 2035-2037. & \textbf{R} & - & Qualification \\
+REQ-OP-COMP-04 & The mission shall comply with the Outer Space Treaty requirements regarding the harmful contamination of celestial environments. & \textbf{R} & - & Qualification \\
+REQ-OP-COMP-05 & The mission shall define an end-of-life procedure to avoid harmful contamination of the Venus atmosphere. & \textbf{R} & - & Qualification \\
+REQ-OP-COMP-07 & All components shall be compatible with what the available contractors can deliver. & \textbf{R} & - & Qualification \\
+REQ-F-COMP-05 & The project shall identify a qualified backup manufacturer for all mission-critical manufactured components before the start of final production. & \textbf{R} & - & Qualification \\
+
+\midrule
+\multicolumn{5}{l}{\textbf{Payload Requirements}} \\
+\midrule
+
+REQ-C-PAY-01 & Each instrument suite shall achieve a successful analysis probability greater than 80\%. & \textbf{T} & EM, PFM & Qualification, Commissioning \\
+REQ-C-PAY-02 & The total mass of the payload shall stay below TBD\,kg. & \textbf{I} & PFM & Acceptance \\
+REQ-F-PAY-03 & Scientific components shall fit within the TBD volume of the allocated space. & \textbf{I} & PFM & Acceptance \\
+REQ-F-PAY-04 & The generated payload data that needs to be stored shall be no more than TBD\,MB. & \textbf{T} & EM & Qualification \\
+
+\end{longtable}
+}
+
+\section{Verification Rationale for Key Requirements}
+
+Several requirements warrant explicit justification for the chosen verification method, particularly those verified by Analysis alone and those carrying a safety-critical designation.
+
+\subsection{REQ-C-MIS-01 and REQ-C-MIS-03 - 5-Year Lifetime and Survival Probability}
+
+A 5-year operational lifetime at Venus cannot be verified by direct test in a reasonable programme schedule. Verification is therefore assigned to Analysis, combining: (i) accelerated balloon envelope leakage testing at elevated temperatures to project long-term degradation; (ii) PSA system endurance modelling at the required 20-22\,g/day leakage compensation rate; (iii) fault tree analysis and reliability modelling to derive the survival probability estimate. Because the impact of failing these requirements on the mission is major, an independent cross-check analysis using a second team and independent models is mandatory per ECSS-E-ST-10-02C clause 5.2.2.1.
+
+\subsection{REQ-F-ENV-03 and REQ-F-ENV-04 - Atmospheric Degradation and Radiation Tolerance}
+
+Full replication of Venus atmospheric conditions - including sulphuric acid aerosol chemistry at 0.5\,bar and 52-62\,km equivalent temperature - is not achievable in a standard ground test facility. As Lorenz~\cite{Lorenz2018} demonstrates, it is physically impossible to achieve all environmental parameters simultaneously at affordable cost, and careful analytical methods validated against available data provide the appropriate approach. Verification is therefore by Analysis, supported by materials compatibility test data from component-level testing and published Venus exploration heritage data. The analytical models are validated against VEGA balloon mission heritage where applicable.
+
+\subsection{REQ-C-MIS-06 - Altitude Adjustment Rate}
+
+Altitude control authority is a function of the PSA top-up rate, ballast capacity, and atmospheric density gradients. Verification by Analysis using the validated altitude control model is appropriate. The Earth stratospheric analogue flight provides a complementary empirical data point on achievable altitude change rates.
+
+\subsection{Safety-Critical Requirements}
+
+The following requirements are designated safety-critical in the requirements baseline (indicated by red highlighting) and are therefore mandated to be verified by Test under ECSS-E-ST-10-02C clause 5.2.2.1(b). No waiver or substitution by Analysis alone is permissible:
+
+\begin{itemize}[itemsep=1pt, parsep=1pt]
+    \item \textbf{REQ-F-LAU-05} - launch-locking mechanism release: verified by functional actuation test on the PFM at representative Venus-transit thermal conditions.
+    \item \textbf{REQ-F-LAU-06} - pre-launch integration compatibility: verified by a full system-level integrated test on the PFM at the launch site prior to encapsulation.
+    \item \textbf{REQ-F-DEP-03} - balloon envelope deployment without tearing: verified by a full deployment sequence test on the PFM, exercising the complete COPV inflation cascade and $\alpha$RX-Mt3 redundancy chain.
+    \item \textbf{REQ-C-DEP-07} - re-entry structural loads: verified by structural load testing on the STM to the required qualification margins over the predicted re-entry load spectrum.
+    \item \textbf{REQ-C-ENV-01 and REQ-C-ENV-02} - atmospheric pressure and temperature tolerance: verified by thermal-vacuum testing on the STM and PFM across the defined qualification temperature and pressure range for the Venus middle cloud layer environment.
+    \item \textbf{REQ-STK-1.7} - survive the operating environment of Venus: this top-level stakeholder requirement is closed out by the combined evidence of REQ-C-ENV-01, REQ-C-ENV-02, REQ-F-ENV-03, and REQ-F-ENV-04, with test evidence being a mandatory constituent.
+\end{itemize}
+
+\section{Verification Process Phasing}
+
+The verification programme is phased with the project life cycle in accordance with ECSS-M-ST-10. The key milestones and verification deliverables are:
+
+\begin{itemize}[itemsep=1pt, parsep=1pt]
+    \item \textbf{Phase~A (PRR):} Initial verification approach defined; preliminary model philosophy proposed; requirement criticality assessment initiated.
+    \item \textbf{Phase~B (SRR/PDR):} Verification Control Document initialised with verification matrix; all system-level requirements assigned methods, levels, and stages; test feasibility confirmed; VCD and preliminary Verification Plan issued.
+    \item \textbf{Phase~C (CDR):} Verification Plan completed and frozen; analysis and Review-of-Design activities completed at lower levels; STM integration commenced; qualification tests initiated at equipment and subsystem levels.
+    \item \textbf{Phase~D (QR/AR):} Full STM structural and thermal qualification campaign completed; EM functional qualification and EMC campaign completed; PFM acceptance and protoflight test campaign completed; Earth stratospheric analogue flight conducted; VCD closed out for all pre-launch requirements; Qualification Review and Acceptance Review held.
+    \item \textbf{Phase~E (LRR/Commissioning):} Pre-launch verification activities completed; flight article delivered; post-entry commissioning verification conducted at Venus following balloon deployment; in-orbit stage VCD entries closed out.
+\end{itemize}
+
+\section{Verification Control Board}
+
+A Verification Control Board (VCB), comprising customer and supplier representatives, is established to incrementally assess verification status and formally close out requirements. The VCB meets at minimum at each project review milestone. The VCD is presented to the VCB at each meeting, and the verification process is considered complete only when the VCB confirms that: documented evidence is recorded in the VCD; all identified requirements have been verified; and associated verification objectives have been reached.
+
+
+\section{Validation}

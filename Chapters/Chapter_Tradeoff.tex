@@ -1,0 +1,261 @@
+\chapter{Trade-off}
+\label{chapter: trade-off}
+
+% Selecting the most promising design configuration is treated in two stages. In the first stage, the configurations within each subsystem are investigated and internal choices are traded-off to identify the most promising designs. The goal of this stage is to define the achievable optimal subsystem performance, given some mass, power and cost provided - this has been the subject of Chapters \ref{}-\ref{}. Afterwards, the promising subsystem options are combined into full system architectures, and those are again traded-off. Here, the overall intention is to optimize resource allocation between subsystems.
+
+% The chapter is structured in three parts. Section~\ref{sec:coupling_map} identifies all significant cross-subsystem couplings, drawing on the N\textsuperscript{2} matrix established in Chapter~\ref{chap:n2}. Section~\ref{sec:param_coupling} quantifies the parameter-level dependencies - mass, power, volume, and reliability - with numerical values drawn directly from the subsystem chapters. Section~\ref{sec:arch_tradeoff} uses these dependencies to score three candidate system-level configurations and identifies the selected baseline together with its residual risks.
+
+Now that all subsystem configurations have been presented, a final architecture must be selected. The configurations within each subsystem are investigated and internal choices are traded-off to identify the most promising designs. The goal of this stage was to define the achievable optimal subsystem performance, given a certain mass, power and cost provided, which has been the subject of Chapters \ref{chap:payload} to \ref{Chap: Structures}. The initial plan was to combine the most promising designs into different system architectures to be traded-off once again in order to select the final architecture. However, once the design of each subsystem was made, it was determined that there is a very limited number of possible design configurations. 
+
+Due to the extensive list of mission requirements and the ambitious goals set for the VISTA team, as well as the harsh conditions present on Venus, many configurations were eliminated in the first (subsystem-level) stage of the trade-offs. That is, even though all subsystems internally traded-off different designs, options were eliminated due to constraints presented by other subsystems without complex system-level coupling. The N\textsuperscript{2} matrix in \autoref{chap:n2} identifies all significant cross-subsystem interface concerns that in themselves caused certain configurations to be discarded. In the following section, \autoref{sec:elimination}, the reason behind the elimination of the different concepts is explained, one by one.
+
+After such exercise, it was concluded that there aren't enough options to construct different system architecture configurations that vary significantly enough to justify the system trade-off exercise. Therefore, for the design of the aerial balloon platform for the VISTA mission, the final selected subsystems design configurations will be combined to form the final architecture, with no system trade-off performed, only the system-level checks to ensure compatibility. 
+
+The selected architecture will then be optimized in the next stages of the design. The final architecture is presented in \autoref{sec:final_arch}.
+
+\section{System-Level Interfaces}\label{sec:coupling_map}
+\label{sec:elimination}
+
+The \autoref{tab:tradeoffinterfaces} below lists specific points of discussion that were raised during the subsystem design process. More precisely, it presents those that were heavily influenced by interface considerations and system-level communication between subsystem was necessary. It aims to show the extent of system-level thinking present in this project, as well as archive future potential areas for reconsideration that go beyond concepts in Chapters \ref{chap:payload} to \ref{Chap: Structures} separately.
+
+{\footnotesize
+\renewcommand{\arraystretch}{1}
+\begin{longtable}{@{} p{1.8cm} p{11cm} p{2.5cm} @{}}
+\label{tab:tradeoffinterfaces}
+
+\textbf{Subsystem} & \textbf{Design options considered} & \textbf{Interface with:} \\
+\midrule
+\endfirsthead
+\toprule
+\textbf{Subsystem} & \textbf{Design options considered - kept / eliminated and why} & \textbf{Key interface} \\
+\midrule
+\endhead
+\midrule
+\multicolumn{3}{r}{\small\textit{continued on next page}} \\
+\endfoot
+\bottomrule
+\endlastfoot
+
+\textbf{STRUC} &
+1.1. \textbf{Cube gondola - eliminated.} Flat sides allow better solar array integration. Good packing efficiency and carrier storage area occupation, however ultimately, the entry capsule is circular in shape, so any internal gains are nullified on deployment capsule packing stage.
+& INSTR, EPS, DEP \\[6pt]
+
+&
+1.2. \textbf{Cylinder gondola - selected.} Better structural symmetry for pendulum stability and descent, most volume-efficient shape for deployment capsule. Solar panel integration discussed with EPS and STRUC, decided as feasible.
+& DEP, ADCS, EPS, STRUC \\[6pt]
+
+&
+2.1. \textbf{Short tether - eliminated.} Balloon envelope shadows the solar panels, reducing power generation below the EPS minimum output requirement.
+& EPS \\[6pt]
+
+&
+2.2. \textbf{Long tether - eliminated.} Introduces large pendulum-mode oscillations that exceed ADCS compensation authority, destabilising gondola attitude.
+& ADCS \\[6pt]
+
+&
+2.3. \textbf{Medium tether - selected.} Balances solar panel clearance from balloon shadow with gondola swing dynamics within ADCS authority.
+& EPS, ADCS \\[6pt]
+\midrule
+\textbf{INSTR} &
+1. \textbf{Towbody probe - eliminated.} Tether tension loads under Venus wind shear conditions exceed the STRUC mass budget; a second independent thermal architecture for the probe would be required from TCS, making the concept infeasible within system resource allocations.
+& STRUC, TCS \\[6pt]
+
+&
+2. \textbf{Gondola-only barometers (no tether) - deprioritised.} Loses directional seismic wavefront filtering; viable fallback but reduced science return, therefore retained as contingency.
+& STRUC \\[6pt]
+
+&
+3. \textbf{Tethered barometer array (Architecture~B) - selected.} Barometers at 15\,m, 85\,m, and 200\,m below gondola form a vertical aperture for infrasound triangulation. GNC must supply continuous altitude state for barometric referencing; CDHS must handle the additional tether sensor data stream within its storage and downlink budget.
+& GNC, CDHS \\[6pt]
+\midrule
+\textbf{ISRU} &
+1. \textbf{Earth-sourced N\textsubscript{2} converter ($\sim$6\,kg) - eliminated.} Unit mass exceeds gondola allocation; STRUC will not accommodate it without violating the gondola mass budget for other subsystems.
+& STRUC \\[6pt]
+
+&
+2.1. \textbf{Option~1 balloon (helium partial-fill + CO\textsubscript{2} ballast) - eliminated.} Initial N\textsubscript{2} fill rate requires $\sim$988\,W continuous power, exceeding the EPS budget.
+& EPS \\[6pt]
+
+&
+2.2 \textbf{Option~2 balloon (pre-filled N\textsubscript{2} + PSA leakage top-up) - selected.} ISRU compensates N\textsubscript{2} leakage requiring only $\sim$21\,W continuous, compatible with EPS budget. Altitude control via internal superpressure bladder commanded by GNC, as discussed with GNC.
+& EPS, GNC \\[6pt]
+
+&
+2.3. \textbf{Option~3 balloon (ISRU-only fill + disposable helium bootstrap balloon) - eliminated.} Same EPS power infeasibility as Option~1 during the fill phase; disposable helium balloon adds STRUC packaging mass and DEP sequence complexity.
+& EPS, STRUC, DEP \\[6pt]
+\midrule
+\textbf{CDHS} &
+1. \textbf{Cross-dipole antenna - eliminated.} RF power draw at required link margin exceeds the EPS power allocation for the communications subsystem and cannot be sufficiently modified with other subsystem's allocations.
+& EPS \\[6pt]
+
+&
+2.1. \textbf{Single antenna - eliminated.} Cannot provide spatially separated feed points for hemispherical angular coverage. ADCS attitude determination relies on two antennas on opposite gondola edges for polarisation diversity and improved low-elevation visibility.
+& ADCS \\[6pt]
+
+&
+2.2. \textbf{Two helical-ring antennas - selected.} Hemispherical coverage without cross-dipole power penalty. MSK modulation selected over BPSK for power efficiency; marginal BER trade-off at low SNR flagged to GNC as potential widening of Doppler position uncertainty at low orbiter elevation angles. Dual-antenna redundancy retained.
+& EPS, GNC \\[6pt]
+
+\midrule
+\textbf{ADCS} &
+1. \textbf{Continuous absolute attitude measurement - eliminated.} Data volume from continuous high-rate attitude telemetry exceeds both on-board CDHS storage capacity and the available downlink budget through the orbiter relay link.
+& CDHS \\[6pt]
+
+&
+2. \textbf{IMU with periodic absolute fixes - selected.} IMU runs continuously at low data rate within CDHS storage budget; absolute corrections applied at each orbiter contact window via GNC Doppler-ranging passes. Drift errors between passes managed by anchoring at pass entry and exit boundaries.
+& CDHS, GNC \\[6pt]
+\midrule
+\textbf{TCS} &
+1. \textbf{Cryocoolers - eliminated.} Continuous cryogenic power draw incompatible with EPS budget. No allocation exists on top of ISRU, instruments, and communications demands.
+& EPS \\[6pt]
+
+&
+2. \textbf{Peltier cooler (TEC) - selected for precision instrument zones.} Low power footprint acceptable within EPS allocation. Applied locally where passive control is insufficient for narrow-tolerance payload instruments.
+& EPS, INSTR \\[6pt]
+
+&
+3. \textbf{Hybrid passive-active architecture - selected overall.} Passive insulation and conductive baseplates handle bulk thermal management within STRUC gondola enclosure. Active heater patches cover cold-case battery and instrument survival without exceeding the EPS nightside power budget.
+& STRUC, EPS, INSTR \\[6pt]
+\midrule
+\textbf{EPS} &
+1. \textbf{Wind turbine - eliminated.} Aerobot drifts with the zonal wind; relative wind velocity at a tether-mounted turbine is near-zero, not producing enough power to defence this mass spending to STRUC.
+& STRUC \\[6pt]
+
+&
+2. \textbf{Swinging pendulum - eliminated.} Recoverable energy from gondola pendulum motion is negligible, also conflicts with ADCS requirement for minimal gondola angular disturbances.
+& ADCS \\[6pt]
+
+&
+3. \textbf{Energy beamed from orbiter - eliminated.} Power delivery restricted to orbiter contact windows and requiring very precise pointing based on balloon location - not achievable by GNC. Cloud-layer attenuation and Venus-Earth pointing geometry reduce transfer efficiency to levels incompatible with continuous loads declared by ISRU.
+& CDHS, GNC, ISRU \\[6pt]
+
+&
+4. \textbf{RTG alone - eliminated.} Not feasible for a Europe-based space mission, and the additional power benefits for ISRU would not be significant enough to justify switching to a USA-based mission setup.
+& STRUC, EXTERNAL (Compliance) \\[6pt]
+
+&
+5. \textbf{Solar arrays + battery - primary baseline.} Solar generation sized to meet ISRU and payload requirements. Battery bridges nightside demand for ISRU, heaters, and housekeeping, within agreed mass budget allocation from STRUC. Array placement constrained by tether geometry to avoid balloon shadow.
+& STRUC, ISRU, INSTR \\[6pt]
+
+&
+6. \textbf{RTG + solar hybrid - retained as fallback.} Adopted if final sizing confirms battery alone cannot bridge the nightside TCS and ISRU continuous loads. RTG mass and TCS waste-heat implications must then be re-evaluated.
+& TCS, STRUC \\[6pt]
+\midrule
+\textbf{GNC} &
+1. \textbf{Radar surface imaging - eliminated.} Radar aperture mass and volume cannot be accommodated within the STRUC gondola envelope. Continuous radar data would impose an excessive processing and storage burden on CDHS beyond its allocated capacity.
+& STRUC, CDHS \\[6pt]
+
+&
+2. \textbf{Doppler tracking via relay orbiter - selected.} Provides absolute position and range-rate at each orbiter pass within the existing CDHS communication link, adding no dedicated hardware mass to STRUC. IMU propagates position between passes. Drift errors halved by anchoring at pass boundaries. MSK modulation (CDHS power constraint) introduces marginal SNR reduction widening position uncertainty at low orbiter elevation angles.
+& CDHS, STRUC, ADCS \\[6pt]
+\midrule
+\textbf{DEP} &
+1. \textbf{Deployment as independent subsystem - confirmed.} Operates autonomously through the EDLI sequence and is jettisoned before float operations; integrating deployment hardware into the float platform would add persistent dead mass penalising the STRUC gondola mass budget over the five-year mission.
+& STRUC \\[6pt]
+
+&
+2. \textbf{Single-point inflation dependency - acknowledged; mitigated.} A deployment failure forfeits instruments, GNC, and ADCS entirely, motivating the $\alpha$RX-Mt3 redundancy architecture and cascaded COPV inflation string. The cascaded COPV layout was also driven by the need to provide a cross-strappable inflation path that does not compromise ISRU gas routing after float.
+& INSTR, GNC, ADCS, ISRU \\[6pt]
+
+&
+3. \textbf{COPV rib structure retained post-deployment - selected.} COPVs repurposed as gondola primary structure ribs after inflation ($\varepsilon_1$ integration vector), recovering deployment hardware as useful STRUC mass rather than jettisoned deadweight.
+& STRUC \\
+
+\end{longtable}
+}
+
+% The criteria for the high-level trade-off are: Total Mass; Total Power; Total Cost. Throughout, the scoring convention mirrors that used in the subsystem chapters (Table~\ref{tab:scoring_scale}):
+
+
+% \begin{table}[H]
+% \centering
+% \renewcommand{\arraystretch}{1}
+% \caption{System-level scoring scale, consistent with subsystem trade-off methodology.}
+% \label{tab:scoring_scale}
+% \begin{tabular}{cl}
+% \hline
+% \textbf{Score} & \textbf{Meaning} \\
+% \hline
+% 5 & Excellent performance; no significant concern. \\
+% 4 & Good performance; minor concerns manageable within current margins. \\
+% 3 & Acceptable; important design concerns requiring active management. \\
+% 2 & Weak performance; significant risk to mission. \\
+% 1 & Very weak; high risk or architecture incompatibility. \\
+% \hline
+% \end{tabular}
+% \end{table}
+
+
+
+% \section{Total Cost}
+% The estimated budget required for a configuration is already a quantified amount, so a comparison can be made directly. 
+
+
+
+
+\section{Final Architecture}
+\label{sec:final_arch}
+
+Due to the aforementioned reasons, the final architecture will be comprised of the selected configurations of each respective subsystem. It is important to note that already on subsystem level, or with decoupled communication between pairs of subsystems without engagement of multiple complex system-wide roles, the design options have been eliminated to only one per subsystem. The reason for such occurrence is the challenging profile of the mission of interest - most subsystem configurations were discarded early on due to inapplicability to project's limited budgets, unique approaches (such as active replenishment system) and demanding requirements.
+
+The resulting architecture integrates a gondola, a buoyancy management system, a distributed science payload, and supporting avionics subsystems into a single coherent float platform.
+
+\subsubsection*{Gondola and Structure}
+The primary structure takes the form of a cylindrical gondola, chosen for the structural symmetry it provides for pendulum stability during float and efficient volume usage within deployment capsule. The gondola is suspended 15 m below the balloon envelope, a tether length selected to balance solar panel clearance from balloon shadow against acceptable gondola swing dynamics. Following atmospheric entry and descent, the COPV rib structure from the deployment stage is retained and incorporated into the gondola's primary structure, recovering descent hardware as useful structural mass.
+
+\subsubsection*{Balloon and Buoyancy Management}
+Buoyancy is maintained through a pre-filled N$_2$ balloon architecture augmented by a Pressure Swing Adsorption system that compensates for slow daily envelope leakage. This approach was selected as the only configuration compatible with the mission power budget; alternatives relying on large-scale in-situ gas generation or disposable helium balloons were eliminated on grounds of power infeasibility or excessive mass.
+
+\subsubsection*{Science Payload}
+The gondola carries a suite of nine instruments targeting atmospheric composition, dynamics, cloud microphysics, and radiative flux. A Neutral Mass Spectrometer characterises bulk atmospheric composition, while a miniature Tunable Laser Spectrometer provides complementary trace gas measurements. Cloud and aerosol properties are measured by an Aerosol Fine-mode spectrometer and an Optical Particle Counter. Atmospheric dynamics are captured through a Wind Instrument System and a Sonic Anemometer providing direct in-situ wind vector measurements. Two pyrgeometers measure upward and downward longwave radiative fluxes, and a TOPS sensor characterises atmospheric optical properties.
+Pressure measurements are made by an array of five barometers distributed across a vertical tethered structure suspended beneath the gondola, with sensors positioned at 15 m, 85 m, and 200 m below the gondola baseline. This vertical aperture, referred to as Architecture B, enables directional seismic wavefront filtering and spatial pressure gradient measurements that a gondola-only barometer configuration could not provide. The navigation subsystem supplies continuous altitude state to the array, and the data handling subsystem manages the resulting multi-stream sensor data.
+
+\subsubsection*{Power System}
+The platform is powered primarily by solar arrays generating power during the Venusian day, supported by a battery for night-side energy storage. Wind energy harvesting and orbiter-beamed power were both eliminated as viable options; the former because the aerobot drifts with the ambient wind leaving no exploitable relative velocity at a turbine, and the latter due to the combined constraints of intermittent orbiter contact windows and cloud-layer attenuation.
+Thermal Control
+Thermal management follows a hybrid passive-active architecture. Passive insulation and conductive baseplates handle the bulk of heat management across the gondola structure. A Palantir Peltier-based cooler provides active precision temperature control in zones housing instruments whose operational requirements exceed what passive management alone can maintain. Active heater patches supplement the system in cold-case conditions, providing survival-level heating to the battery and critical instruments.
+
+\subsubsection*{Attitude Determination, Navigation, and Communications}
+Attitude determination is performed by an IMU operating continuously at a low data rate, with periodic absolute corrections applied during relay orbiter contact windows via Doppler-ranging passes. This approach was selected over continuous absolute attitude measurement, which would have generated data volumes exceeding both onboard storage capacity and downlink budget.
+Navigation relies on the same Doppler-tracking infrastructure, with the relay orbiter providing absolute position and range-rate at each contact pass. The IMU propagates the platform's position between passes, with accumulated drift errors anchored at each pass boundary. It is noted that the MSK modulation scheme adopted for the communications subsystem introduces a marginal signal-to-noise trade-off that slightly widens position uncertainty at low orbital elevation angles.
+Communications are handled by two helical-ring antennas mounted on opposite gondola edges, providing hemispherical coverage and polarisation diversity without the power penalty associated with a cross-dipole configuration. MSK modulation was selected for its power efficiency, with a small bit-error-rate trade-off relative to BPSK acknowledged. The dual-antenna architecture additionally provides a redundant communication path in the event of a deployment stage jettison failure.
+
+\subsubsection*{Entry, Descent, and Deployment}
+The deployment subsystem operates as an independent unit, functioning autonomously through the entry, descent, and inflation phase before being jettisoned ahead of the float mission. Decoupling deployment from the float platform avoids carrying persistent descent hardware mass through the five-year operational lifetime. The single-point dependency that deployment success represents for the payload, navigation, and attitude determination subsystems is acknowledged, and motivates the $\alpha$RX-Mt3 redundancy architecture and cascaded COPV inflation string incorporated into the deployment design.
+
+
+\section{Sensitivity Analysis}
+
+no sensivty lmaao
+
+%TCS SCRATCHED OFF CRYOCOOLERS BECAUSE OF too much POWER from EPS
+
+%dome-gondola connection: long lines - too much mass mass (affects STRUC) and oscillation (affects ADCS) but short lines (EPS) dome makes solar panels overshadowed (EPS)
+
+%GNC - radar tracking scratched bcs radar too requiring from PAYLOAD subsystem (no place for it) 
+
+%CDHS - cross dipole antenna cant be used bcs too much power required from EPS. plus CDHS uses minimum shift keying bcs its more power efficient, but lower reliability (GNC affected)
+
+%CDHS - one antenna not possible bcs ADCS needs two antennas for dipole 
+
+%STRUC layout : PAYLOAD scratches off the configuration that doesnt have enough opening for payloads to collect measurements
+
+%PAYLOAD scratched off towbody because its too heavy (it would affect STRUC badly, also TCS because towbody would have thermal control too)
+
+%PAYLOAD consideration: barometers on wire need altitude input - GNC challenge/CDHS affected 
+
+%ADCS: conf with always absolute measurement scratched from CDHS, as its not possible too much data. so IMU with only absolute fixes once in a while,only marginal effect on STRUC (extra mass)
+
+%ISRU - Earth 6kg converter - too heavy (STRUC)
+
+%CDHS - redundancy for antenna if DEPLOYMENT fails
+
+
+
+
+
+
+
+
+
+

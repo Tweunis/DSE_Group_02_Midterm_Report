@@ -1,0 +1,254 @@
+\chapter{N2 Diagram}
+\label{chap:n2}
+
+The N\textsuperscript{2} diagram is constructed in six steps, each traceable to a published source. First, a single hierarchical level of decomposition is fixed and the N elements are placed on the diagonal \cite{lano1977,nasaappf}. Second, the row-to-column convention is established: outputs leave a row and inputs enter a column \cite{lano1977,incose2023}. Third, each off-diagonal interface is classified by type \cite{nasaappf}. Fourth, interfaces are enumerated from the system definition \cite{lano1977}. Fifth, the matrix is inspected for symmetry to identify feedback loops, asymmetries, and coupling clusters \cite{steward1981,eppinger1994,deweck2015,becker2000}. Sixth, internal interfaces are partitioned from external ones \cite{lano1977,sicsa2016}.
+
+\section{Decomposition}
+
+The diagram is built at the subsystem level of the Functional Breakdown Structure (Figure 5-4 of the Baseline Report). All nine elements sit at the same hierarchical level, satisfying the Lano (1977) requirement of a single decomposition stratum \cite{lano1977}. Compared with the previous eight-subsystem baseline, the former Avionics subsystem has been split into ISRU + Buoyancy and Navigation, while the ADCS scope is now limited to attitude determination and control, with altitude control migrating to Navigation.
+
+The nine subsystems and their responsible engineers are listed below.
+
+\begin{table}[ht]
+\centering\small
+\caption{VISTA subsystem decomposition.}
+\label{tab:N2-subsystems}
+\begin{tabularx}{\textwidth}{l l l X}
+\toprule
+\textbf{ID} & \textbf{Subsystem} & \textbf{Owner} & \textbf{Primary function} \\
+\midrule
+SYS01 & Structures         & Twan     & Gondola structure, subsystem mounting, structural integrity, dynamic loads \\
+SYS02 & CDHS               & Taran    & On-board computer, data handling, data storage, communications (uplink/downlink) \\
+SYS03 & ADCS               & Traian   & Attitude determination \& control, static \& dynamic stability \\
+SYS04 & Navigation          & Julek    & Trajectory tracking \& prediction, positioning determination, altitude control, latitude \& longitude prediction \\
+SYS05 & Payload             & Bea      & Science instruments: positioning, seismology, atmospheric science \\
+SYS06 & ISRU + Buoyancy     & Vadim    & In-situ resource utilisation, gas filtering \& extraction, balloon type \& sizing, gas-leakage management \\
+SYS07 & Power               & Filippos & Power generation, storage, distribution, power-management modes \\
+SYS08 & Thermals \& Env.    & Bartek   & Thermal control (cooling \& heating), chemical resistance, UV resistance \\
+SYS09 & Deployment          & Emil     & Entry, velocity reduction, high-velocity protection, deadweight separation, balloon deployment \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\section{Reading Convention and Interface Classfiication}
+
+Subsystems are placed on the diagonal of the matrix. Cell (i, j) lists what subsystem i delivers to subsystem j; that is, outputs leave a row and inputs enter a column \cite{lano1977}. Cells marked ``-'' indicate that no significant direct interface exists at the current level of definition.
+
+Following NASA SEH Appendix F \cite{nasaappf}, every non-empty off-diagonal cell is tagged with one or more interface-type codes. Five classes are sufficient to cover all interfaces present in the VISTA architecture.
+
+\section{Interface Matrix}
+
+The full 9 $\times$ 9 N\textsuperscript{2} matrix is presented below. Each off-diagonal cell contains the interface-type tag(s) followed by a brief description of the interface content. It should be noted that SYS09 (Deployment) is active only during the entry, descent, and deployment phase (FFD §5.0). Its row and column entries apply exclusively to that phase; the deployment hardware is jettisoned before nominal mission operations begin. Thermal protection during entry is internal to SYS09 (the heat shield / TPS, REQ-F-DEP-13/14/15) and therefore does not appear as a Thermals \& Environment - Deployment interface in the matrix.
+
+\section{Coupling and Asymmetry Analysis}
+
+Following the DSM-style reading recommended by Steward (1981) \cite{steward1981}, Eppinger et al. (1994) \cite{eppinger1994}, and de Weck (2015) \cite{deweck2015}, four structural features of the matrix are identified. The interface-reduction logic of Becker \& Bostelman (2000) \cite{becker2000} is noted as a forward action item, since reduction is more appropriately applied at the next level of decomposition rather than at this baseline level.
+
+
+\begin{landscape}
+
+\begin{table}[H]
+\centering
+\caption{Interface classification tags used in the N\textsuperscript{2} matrix \cite{nasaappf}.}
+\label{tab:N2-intf-tags}
+\begin{tabular}{c l l}
+\toprule
+\textbf{Tag} & \textbf{Interface type} & \textbf{Examples} \\
+\midrule
+\textbf{M} & Mechanical / structural & Mounts, suspension, separation loads \\
+\textbf{E} & Electrical power        & Power bus to all powered loads \\
+\textbf{D} & Data / command           & CDHS commands and telemetry; sensor data \\
+\textbf{T} & Thermal                  & Thermal regulation; waste-heat flows \\
+\textbf{F} & Fluid / gas              & Lift-gas, ISRU intake, inflation \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{table}[H]
+\centering
+\caption{N\textsuperscript{2} interface matrix --- VISTA subsystem interfaces.}
+\label{tab:N2}
+
+\definecolor{diagblue}{HTML}{D3E5EF}
+\definecolor{headgray}{HTML}{E3E2E0}
+\newcommand{\intf}[2]{\textbf{[#1]}~#2}
+\newcommand{\diag}[1]{\cellcolor{diagblue}\textbf{#1}}
+\newcommand{\na}{---}
+
+\resizebox{\linewidth}{!}{%
+\renewcommand{\arraystretch}{1.40}
+\setlength{\tabcolsep}{3pt}
+\scriptsize
+\begin{tabular}{|>{\raggedright\arraybackslash\bfseries}p{2.2cm}|
+                 p{2.5cm}|p{2.5cm}|p{2.5cm}|p{2.5cm}|p{2.5cm}|
+                 p{2.5cm}|p{2.5cm}|p{2.6cm}|p{2.8cm}|}
+\hline
+\rowcolor{headgray}
+\textnormal{From $\downarrow$ / To $\rightarrow$}
+ & SYS01 Structures
+ & SYS02 CDHS
+ & SYS03 ADCS
+ & SYS04 Navigation
+ & SYS05 Payload
+ & SYS06 ISRU + Buoyancy
+ & SYS07 Power
+ & SYS08 Thermals \& Env.
+ & SYS09 Deployment \\
+\hline
+
+SYS01 Structures
+ & \diag{Structures}
+ & \intf{M}{Structural accommodation for CDHS hardware; harness paths}
+ & \intf{M}{Mounting \& alignment for ADCS sensors}
+ & \intf{M}{Mounting for navigation sensors}
+ & \intf{M}{Payload mounting; sample-inlet accommodation}
+ & \intf{M}{Envelope \& gondola structural support; ISRU mounts}
+ & \intf{M}{Power-system mounts; harness paths}
+ & \intf{M,\,T}{Structural accommodation, conductive thermal paths}
+ & \intf{M}{Aeroshell interface; parachute \& separation hard-points; balloon mass \& CG} \\
+\hline
+
+SYS02 CDHS
+ & \intf{M}{Antenna size}
+ & \diag{CDHS}
+ & \intf{D}{Attitude mode commands; setpoint updates}
+ & \intf{D}{Navigation mode commands; altitude setpoints}
+ & \intf{D}{Science scheduling \& sampling commands; data-storage I/F}
+ & \intf{D}{ISRU commands; gas-management commands}
+ & \intf{D}{Load-shedding \& bus-mode commands}
+ & \intf{D}{Thermal-mode setpoints}
+ & \intf{D}{Deployment-sequence commands} \\
+\hline
+
+SYS03 ADCS
+ & \intf{M}{Dynamic loading}
+ & \intf{D}{Attitude telemetry}
+ & \diag{ADCS}
+ & \intf{D}{Attitude state for trajectory computation}
+ & \na
+ & \na
+ & \intf{E}{ADCS sensor \& actuator power demand}
+ & \na
+ & \intf{D}{Attitude stability data during descent \& deployment} \\
+\hline
+
+SYS04 Navigation
+ & \na
+ & \intf{D}{Altitude, position \& trajectory telemetry}
+ & \intf{D}{Drift / trajectory data for attitude planning}
+ & \diag{Navigation}
+ & \intf{D}{Position / drift data for science geo-referencing}
+ & \intf{D}{Altitude-control commands (vent / inflate requests)}
+ & \intf{E}{Navigation sensor power demand}
+ & \intf{D}{Altitude / position state for thermal-mode selection}
+ & \intf{D}{Trajectory data during descent} \\
+\hline
+
+SYS05 Payload
+ & \intf{M}{Payload mass \& loading distribution}
+ & \intf{D}{Science data stream; instrument health monitoring}
+ & \intf{M}{CG configuration}
+ & \intf{D}{Auxiliary atmospheric data (P, T, wind) for navigation}
+ & \diag{Payload}
+ & \na
+ & \intf{E}{Instrument power demand \& duty cycle}
+ & \intf{T}{Heat dissipation; sensor-temperature limits}
+ & \na \\
+\hline
+
+SYS06 ISRU + Buoyancy
+ & \intf{M}{Envelope tension \& gondola suspension loads}
+ & \intf{D}{Lift-gas pressure \& leakage telemetry; ISRU status}
+ & \intf{D}{Buoyancy state feedback (affects attitude)}
+ & \intf{D,\,F}{Buoyancy / lift-gas state for altitude control}
+ & \na
+ & \diag{ISRU + Buoyancy}
+ & \intf{E}{Lift-gas system \& ISRU power demand}
+ & \intf{T}{Gondola temperature control }
+ & \intf{F,\,D}{Inflation manifold I/F; gas-charge confirmation} \\
+\hline
+
+SYS07 Power
+ & \intf{M}{Power-system mass \& vibration loads}
+ & \intf{E}{Regulated bus power.} \intf{D}{Bus voltage, SoC, fault telemetry}
+ & \intf{E}{Power to ADCS sensors / actuators}
+ & \intf{E}{Power to navigation sensors}
+ & \intf{E}{Power to instruments}
+ & \intf{E}{Regulated bus power to lift-gas / ISRU systems}
+ & \diag{Power}
+ & \intf{T}{Battery / regulator waste heat}
+ & \intf{E}{Power for deployment actuation} \\
+\hline
+
+SYS08 Thermals \& Env.
+ & \intf{M,\,T}{Thermal-induced structural loads}
+ & \intf{D}{Thermal telemetry; over/under-temp.\ flags}
+ & \intf{T}{IMU / sensor temperature regulation}
+ & \intf{T}{Navigation sensor temperature regulation}
+ & \intf{T}{Instrument temperature regulation}
+ & \intf{T}{Thermal regulation of ISRU \& envelope equipment}
+ & \intf{T}{Battery thermal regulation}
+ & \diag{Thermals \& Env.}
+ & \na \\
+\hline
+
+SYS09 Deployment
+ & \intf{M}{Pyroshock \& separation loads}
+ & \intf{D}{Deployment-event telemetry}
+ & \intf{D}{Initial attitude state at release}
+ & \intf{D}{Initial position / altitude state at release}
+ & \intf{M,\,T}{Payload-protection state during entry}
+ & \intf{D,\,M}{Inflation trigger; envelope release}
+ & \na
+ & \intf{T}{Thermal gradient and range achieved during descent}
+ & \diag{Deployment} \\
+\hline
+\end{tabular}%
+}
+\end{table}
+\end{landscape}
+
+\subsection{Asymmetric (one-way) interfaces}
+
+Three subsystem pairs exhibit one-way interfaces, where the cell in one direction is populated but its transpose is empty:
+
+\begin{itemize}
+    \item \textbf{Structures (SYS01) $\rightarrow$ Navigation (SYS04)}: Structures provides passive mechanical accommodation for navigation sensors but receives no functional output in return. This is a typical pattern for a structures subsystem \cite{lano1977}.
+    \item \textbf{Power (SYS07) $\rightarrow$ Deployment (SYS09)}: Electrical power flows one-way for deployment actuation. SYS09 returns no output to SYS07 because the deployment hardware is jettisoned before nominal operations commence.
+    \item \textbf{Navigation (SYS04) $\rightarrow$ Thermals \& Environment (SYS08)}: Navigation provides altitude and position state data used for thermal-mode selection. Thermals \& Environment returns only passive temperature regulation (sensor conditioning) with no data-level feedback.
+\end{itemize}
+
+\subsection{Pairs with no direct interface}
+
+Three subsystem pairs have no interface in either direction:
+
+\begin{itemize}
+    \item \textbf{Payload (SYS05) - ISRU + Buoyancy (SYS06)}: The Payload draws atmosphere directly (per Baseline Report §2.3.3) rather than via the lift-gas system; no data or resource exchange exists at this decomposition level.
+    \item \textbf{Payload (SYS05) - ADCS (SYS03)}: Position and drift data for science geo-referencing now routes through the dedicated Navigation subsystem (SYS04), eliminating the need for a direct Payload–ADCS interface.
+    \item \textbf{Thermals \& Environment (SYS08) - Deployment (SYS09)}: Thermal protection during entry is handled internally to SYS09 by the heat shield and TPS; Thermals \& Environment neither receives a heat-flux profile from, nor supplies conditioning to, the deployment hardware.
+\end{itemize}
+
+\section{Central-bus subsystems}
+
+The primary altitude-control feedback loop couples \textbf{Navigation (SYS04)} and \textbf{ISRU} + \textbf{Buoyancy (SYS06)}. Navigation issues vent and inflate commands, while ISRU + Buoyancy returns buoyancy and lift-gas state data [D, F]. This tight coupling is a direct consequence of decomposing the former Avionics subsystem and warrants close interface-control attention throughout detailed design.
+
+
+\textbf{Power (SYS07)} is coupled to every other subsystem in at least one direction, and \textbf{CDHS (SYS02)} commands all active subsystems - producing no output only to \textbf{Structures (SYS01)}. Both function as central buses, consistent with the Functional Flow Diagram. The addition of Navigation as a ninth subsystem introduces one new Power interface and one new CDHS interface, but does not alter the bus topology.
+
+\section{ADCS - Navigation coupling}
+
+The separation of attitude control (SYS03) from trajectory and altitude control (SYS04) creates a bidirectional data interface: ADCS provides attitude state for trajectory computation, and Navigation returns drift and trajectory data for attitude planning. This feedback loop must be carefully managed in the on-board software architecture to avoid circular dependency.
+
+These observations are advisory at the current design stage and do not yet drive matrix re-clustering or interface reduction, which would be appropriate at the next level of decomposition \cite{becker2000}.
+
+\section{External Interfaces}
+
+Per §5.2.3 of the Baseline Report, three interfaces sit outside this internal N\textsuperscript{2} and are listed separately, following the partitioning approach exemplified by the SICSA N\textsuperscript{2} approach \cite{sicsa2016}:
+
+\begin{itemize}
+    \item \textbf{Launcher interface} - supports launch.
+    \item \textbf{Ground systems interface} - supports cruise operations and commanding.
+    \item \textbf{Communication link with the ground systems} - via the orbiter relay (REQ-F-DEP-01), supports science downlink.
+\end{itemize}
+
+
